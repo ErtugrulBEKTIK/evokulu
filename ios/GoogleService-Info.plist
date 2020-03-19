@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>851073004011-ecm9o1vd9lv0jfq2it46tkbr6r6qjuvi.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.851073004011-ecm9o1vd9lv0jfq2it46tkbr6r6qjuvi</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD7ZJWWSAhOIOS1m-wX-Zk7kqfLLEpi5FA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>851073004011</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>org.tugva.evokuluapp</string>
+	<key>PROJECT_ID</key>
+	<string>ev-okulu</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ev-okulu.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:851073004011:ios:feda2782cd2f704650a9ae</string>
+	<key>DATABASE_URL</key>
+	<string>https://ev-okulu.firebaseio.com</string>
+</dict>
+</plist>

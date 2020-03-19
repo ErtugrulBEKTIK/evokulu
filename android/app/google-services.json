@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "851073004011",
+    "firebase_url": "https://ev-okulu.firebaseio.com",
+    "project_id": "ev-okulu",
+    "storage_bucket": "ev-okulu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:851073004011:android:221113196959016850a9ae",
+        "android_client_info": {
+          "package_name": "com.evokulu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "851073004011-5bhpclk6j1o1vg02du1vr5kkdc97p1nm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDsuxP8bupEoYv69Kb3fjQs1EstEEah4iE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "851073004011-5bhpclk6j1o1vg02du1vr5kkdc97p1nm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "851073004011-ecm9o1vd9lv0jfq2it46tkbr6r6qjuvi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.tugva.evokuluapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
