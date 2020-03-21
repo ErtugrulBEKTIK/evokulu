@@ -16,11 +16,7 @@ import Redirector from './screens/AuthStack/Redirector';
 // Stacks & Screens
 import AuthStack from './screens/AuthStack';
 import HomeStack from './screens/HomeStack';
-import ContactStack from './screens/ContactStack';
-import DocumentStack from './screens/DocumentStack';
-import ProfileStack from './screens/ProfileStack';
-import AnnouncementStack from './screens/AnnouncementStack';
-import CafeteriaStack from './screens/CafeteriaStack';
+
 
 
 const App = createDrawerNavigator({
@@ -31,56 +27,6 @@ const App = createDrawerNavigator({
       headerLeft: <DrawerButton navigation={navigation} />,
       drawerIcon: ({ tintColor }) => (
         <Icon style={{color: tintColor, fontSize: res(25)}} name='home' />
-      ),
-    })
-  },
-  Profile: {
-    screen: ProfileStack,
-    navigationOptions: ({ navigation }) => ({
-      title: 'Profil',
-      headerLeft: <DrawerButton navigation={navigation} />,
-      drawerIcon: ({ tintColor }) => (
-        <Icon style={{color: tintColor, fontSize: res(25)}} name='contact' />
-      ),
-    })
-  },
-  Contacts: {
-    screen: ContactStack,
-    navigationOptions: ({ navigation }) => ({
-      title: 'Rehber',
-      headerLeft: <DrawerButton navigation={navigation} />,
-      drawerIcon: ({ tintColor }) => (
-        <Icon style={{color: tintColor, fontSize: res(25)}} name='contacts' />
-      ),
-    })
-  },
-  Cafeteria: {
-    screen: CafeteriaStack,
-    navigationOptions: ({ navigation }) => ({
-      title: 'Yemekhane',
-      headerLeft: <DrawerButton navigation={navigation} />,
-      drawerIcon: ({ tintColor }) => (
-        <Icon style={{color: tintColor, fontSize: res(25)}} type="MaterialIcons" name="restaurant" />
-      ),
-    })
-  },
-  Announcements: {
-    screen: AnnouncementStack,
-    navigationOptions: ({ navigation }) => ({
-      title: 'Duyurular',
-      headerLeft: <DrawerButton navigation={navigation} />,
-      drawerIcon: ({ tintColor }) => (
-          <Icon style={{color: tintColor, fontSize: res(25)}} name='megaphone' />
-      ),
-    })
-  },
-  Documents: {
-    screen: DocumentStack,
-    navigationOptions: ({ navigation }) => ({
-      title: 'Belgeler',
-      headerLeft: <DrawerButton navigation={navigation} />,
-      drawerIcon: ({ tintColor }) => (
-        <Icon style={{color: tintColor, fontSize: res(25)}} name='document' />
       ),
     })
   }
@@ -108,7 +54,7 @@ const SwitchNavigator = createSwitchNavigator(
     Auth: AuthStack,
   },
   {
-    initialRouteName: 'Redirector',
+    initialRouteName: 'App',
   }
 );
 

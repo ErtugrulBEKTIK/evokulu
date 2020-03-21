@@ -4,7 +4,7 @@ import {createStackNavigator} from "react-navigation";
 import Home from './Home';
 import DrawerButton from "../../components/DrawerButton";
 import LogoutButton from "../../components/LogoutButton";
-import {res} from "../../helpers";
+import {res} from "~/helpers";
 
 const HomeStack = createStackNavigator({
   Home: {

@@ -14,6 +14,8 @@
     "formik": "^2.0.4",
     "jetifier": "^1.6.4",
     "lodash": "^4.17.15",
+    "lottie-ios": "^2.5.0",
+    "lottie-react-native": "^2.6.1",
     "mobx": "^5.15.0",
     "mobx-react": "^5.4.3",
     "moment": "^2.24.0",
@@ -41,6 +43,11 @@
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.57.0",
     "react-test-renderer": "16.8.3"
+  },
+  "rnpm": {
+    "assets": [
+      "./src/assets/fonts/"
+    ]
   },
   "jest": {
     "preset": "react-native"
