@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
+import {View, TextInput} from "react-native";
 import { StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import { res } from '../helpers';
-
-import {View, Text} from "react-native";
+import { res } from '~/helpers';
+import { Text } from '~/components/my-base'
 
 export default class Header extends Component {
 
@@ -20,6 +20,7 @@ export default class Header extends Component {
                           colors={['#A098F3', '#776CE7']}/>
         </View>
         <Text style={s.title}>{this.props.title}</Text>
+        <TextInput style/>
       </View>
     );
   }
@@ -39,18 +40,17 @@ const s = StyleSheet.create({
     transform: [
       {scaleX: 4}
     ],
-    overflow: 'hidden'
+    overflow: 'hidden',
   },
   background: {
-    flex: 1
+    flex: 1,
   },
   title: {
     position: 'absolute',
     alignSelf: 'center',
     top: res(75),
     color: 'white',
-    fontSize: res(19),
-    fontFamily: 'ComicSansMS'
+    fontSize: res(19)
   },
 
 });

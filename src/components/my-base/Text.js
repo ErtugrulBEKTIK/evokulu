@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text } from 'react-native';
-import {res} from "../../helpers";
+import {res} from "~/helpers";
 
 export default class _Text extends Component {
   render() {
@@ -15,6 +15,7 @@ export default class _Text extends Component {
 const s = StyleSheet.create({
   text: {
     fontSize: res(16),
-    color: 'black'
+    color: 'black',
+    fontFamily: 'ComicSansMS'
   }
 });
