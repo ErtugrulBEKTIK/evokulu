@@ -5,11 +5,10 @@ import { res } from './helpers';
 import {
   createAppContainer,
   createDrawerNavigator,
-  createSwitchNavigator
+  createSwitchNavigator,
+  createBottomTabNavigator
 } from 'react-navigation';
 
-import DrawerButton from './components/DrawerButton';
-import DrawerMenu from './components/DrawerMenu';
 
 import Redirector from './screens/AuthStack/Redirector';
 
@@ -19,30 +18,61 @@ import HomeStack from './screens/HomeStack';
 
 
 
-const App = createDrawerNavigator({
+const App = createBottomTabNavigator({
   Home: {
     screen: HomeStack,
     navigationOptions: ({ navigation }) => ({
       title: 'Anasayfa',
-      headerLeft: <DrawerButton navigation={navigation} />,
-      drawerIcon: ({ tintColor }) => (
+      tabBarIcon: ({ tintColor }) => (
         <Icon style={{color: tintColor, fontSize: res(25)}} name='home' />
+      ),
+    })
+  },
+  Yarisma: {
+    screen: HomeStack,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Yarışma',
+      tabBarIcon: ({ tintColor }) => (
+        <Icon style={{color: tintColor, fontSize: res(25)}} name='book' />
+      ),
+    })
+  },
+  Tavsiyeler: {
+    screen: HomeStack,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Tavsiyeler',
+      tabBarIcon: ({ tintColor }) => (
+        <Icon style={{color: tintColor, fontSize: res(25)}} name='star' />
+      ),
+    })
+  },
+  Profil: {
+    screen: HomeStack,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Profil',
+      tabBarIcon: ({ tintColor }) => (
+        <Icon style={{color: tintColor, fontSize: res(25)}} name='notifications' />
       ),
     })
   }
 }, {
-  initialRouteName: 'Home',
-  contentComponent: DrawerMenu,
-  drawerWidth: res(250),
-  overlayColor: 'rgba(0,0,0,0.67)',
-  contentOptions: {
-    activeTintColor: '#fff',
-    inactiveTintColor: '#3897a7',
-    activeBackgroundColor: '#48aec4',
-    inactiveBackgroundColor: '#fff',
-    iconContainerStyle: { marginRight: 0, width: res(25)},
+  tabBarOptions: {
+    activeTintColor: '#384F7D',
+    showIcon: true,
+    inactiveTintColor: 'rgba(56, 79, 125, 0.45);',
     labelStyle: {
-      fontSize: res(14)
+      fontFamily: 'ComicSansMS'
+    },
+    style: {
+      borderTopWidth: 0,
+      shadowColor: 'black',
+      shadowOpacity: .2,
+      shadowRadius: res(3),
+      shadowOffset: {
+        width:0,
+        height: res(2)
+      },
+      elevation: 4
     }
   }
 });
