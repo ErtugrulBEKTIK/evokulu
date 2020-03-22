@@ -15,8 +15,8 @@ export default class Box extends Component {
 const s = StyleSheet.create({
   box: {
     backgroundColor: 'white',
-    padding: res(20),
-    borderRadius: res(5),
+    padding: res(13),
+    borderRadius: res(7),
     shadowColor: 'rgba(71, 55, 255, 0.08)',
     shadowOpacity: 1,
     shadowRadius: res(7),

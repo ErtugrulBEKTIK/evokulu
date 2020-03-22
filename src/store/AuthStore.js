@@ -4,7 +4,7 @@ import axios from '../Api';
 import { API_KEY } from '../../config';
 
 // navigation service
-import NavigationService from '../NavigationService';
+import NavigationService from '~/NavigationService';
 
 const defaultUser = {
   Name: '',

@@ -29,6 +29,7 @@
     "react-native-push-notification": "^3.1.9",
     "react-native-reanimated": "^1.4.0",
     "react-native-responsive-fontsize": "^0.4.2",
+    "react-native-svg": "^12.0.3",
     "react-native-swiper-flatlist": "^2.0.3",
     "react-navigation": "^3.13.0",
     "yup": "^0.27.0"
@@ -42,6 +43,7 @@
     "babel-plugin-root-import": "^6.4.1",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.57.0",
+    "react-native-svg-transformer": "^0.14.3",
     "react-test-renderer": "16.8.3"
   },
   "rnpm": {

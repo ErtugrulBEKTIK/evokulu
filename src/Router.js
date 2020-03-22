@@ -4,17 +4,15 @@ import { res } from './helpers';
 
 import {
   createAppContainer,
-  createDrawerNavigator,
-  createSwitchNavigator,
   createBottomTabNavigator
 } from 'react-navigation';
 
 
-import Redirector from './screens/AuthStack/Redirector';
-
 // Stacks & Screens
 import AuthStack from './screens/AuthStack';
 import HomeStack from './screens/HomeStack';
+import ExamStack from './screens/ExamStack';
+import AdviceStack from './screens/AdviceStack';
 
 
 
@@ -29,7 +27,7 @@ const App = createBottomTabNavigator({
     })
   },
   Yarisma: {
-    screen: HomeStack,
+    screen: ExamStack,
     navigationOptions: ({ navigation }) => ({
       title: 'Yarışma',
       tabBarIcon: ({ tintColor }) => (
@@ -38,7 +36,7 @@ const App = createBottomTabNavigator({
     })
   },
   Tavsiyeler: {
-    screen: HomeStack,
+    screen: AdviceStack,
     navigationOptions: ({ navigation }) => ({
       title: 'Tavsiyeler',
       tabBarIcon: ({ tintColor }) => (
@@ -47,8 +45,9 @@ const App = createBottomTabNavigator({
     })
   },
   Profil: {
-    screen: HomeStack,
+    screen: AuthStack,
     navigationOptions: ({ navigation }) => ({
+      tabBarVisible: false,
       title: 'Profil',
       tabBarIcon: ({ tintColor }) => (
         <Icon style={{color: tintColor, fontSize: res(25)}} name='notifications' />
@@ -56,6 +55,7 @@ const App = createBottomTabNavigator({
     })
   }
 }, {
+  initialRouteName: "Profil",
   tabBarOptions: {
     activeTintColor: '#384F7D',
     showIcon: true,
@@ -64,6 +64,7 @@ const App = createBottomTabNavigator({
       fontFamily: 'ComicSansMS'
     },
     style: {
+      paddingVertical: res(5),
       borderTopWidth: 0,
       shadowColor: 'black',
       shadowOpacity: .2,
@@ -77,15 +78,5 @@ const App = createBottomTabNavigator({
   }
 });
 
-const SwitchNavigator = createSwitchNavigator(
-  {
-    Redirector,
-    App,
-    Auth: AuthStack,
-  },
-  {
-    initialRouteName: 'App',
-  }
-);
 
-export default createAppContainer(SwitchNavigator);
+export default createAppContainer(App);

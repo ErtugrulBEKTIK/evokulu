@@ -84,7 +84,7 @@ export default class SignInForm extends Component {
           }) => (
           <React.Fragment>
 
-              <Item error={errors.username && touched.username} floatingLabel>
+              <Item error={errors.username && touched.username}>
                 <Label>Kullanıcı adı</Label>
                 <Input
                   returnKeyType={'next'}
@@ -101,7 +101,7 @@ export default class SignInForm extends Component {
 
               <Item
                 error={errors.password && touched.password}
-                floatingLabel
+
                 style={{marginTop: res(10)}}
               >
                 <Label>Şifre</Label>
