@@ -65,6 +65,7 @@ const App = createBottomTabNavigator({
     },
     style: {
       paddingVertical: res(5),
+      height: res(50),
       borderTopWidth: 0,
       shadowColor: 'black',
       shadowOpacity: .2,

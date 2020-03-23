@@ -13,54 +13,6 @@ import {inject, observer} from 'mobx-react';
 @observer
 export default class SignInForm extends Component {
 
-  _handleSubmit = async ({ username, password }, bag) => {
-    try {
-      const response = await axios.post('Login/Login',
-        {
-          Username: username,
-          UserPass: password,
-        }
-      );
-
-      if (!response.data) {
-        Alert.alert(
-          'Hata',
-          'Giriş bilgileri hatalı.'
-        );
-        return false;
-      }
-
-      // Save user's device token
-      const tokenResult = await axios.post('Login/ImeiNoControl',
-        {
-          Username: username,
-          UserPass: password,
-          EmpId: username,
-          device_token: this.props.AuthStore.deviceToken,
-          tokenkey: response.data[0].Tokenkey
-        }
-      );
-
-      if (!tokenResult.data) {
-        Alert.alert(
-          'Hata',
-          'Sorun oluştu.'
-        );
-        return false;
-      }
-
-
-      bag.setSubmitting(false);
-      this.props.AuthStore.saveUser(username, response.data[0]);
-    }catch (e) {
-      bag.setSubmitting(false);
-      Alert.alert(
-        'Hata',
-        'Bağlantı hatası.'
-      );
-      console.log(e);
-    }
-  };
 
   render() {
     return (

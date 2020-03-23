@@ -12,11 +12,14 @@ const AuthStack = createStackNavigator(
       }
     },
     SignUp: {
-      screen: SignUp
+      screen: SignUp,
+      navigationOptions: {
+        header: null,
+      }
     }
   },
   {
-    initialRouteName: 'SignIn'
+    initialRouteName: 'SignUp'
   }
 );
 

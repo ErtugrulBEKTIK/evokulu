@@ -373,6 +373,20 @@
 			remoteGlobalIDString = 94DDAC5C1F3D024300EED511;
 			remoteInfo = "RNSVG-tvOS";
 		};
+		998D0F7A2429484C00A2B6C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9920BC9B2426089D005C2692 /* Lottie.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 84FE12EE1E4C1485009B157C;
+			remoteInfo = LottieLibraryIOS;
+		};
+		998D0FB32429489C00A2B6C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBE60E10A9204764BFB6CF20 /* RNFirebase.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 58B511DA1A9E6C8500147676;
+			remoteInfo = RNFirebase;
+		};
 		ADBDB9261DFEBF0700ED6528 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */;
@@ -1064,6 +1078,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				998D0FB42429489C00A2B6C3 /* PBXTargetDependency */,
+				998D0F7B2429484C00A2B6C3 /* PBXTargetDependency */,
 			);
 			name = EvOkulu;
 			productName = "Hello World";
@@ -1840,6 +1856,16 @@
 			isa = PBXTargetDependency;
 			target = 2D02E47A1E0B4A5D006451C7 /* EvOkulu-tvOS */;
 			targetProxy = 2D02E4911E0B4A5D006451C7 /* PBXContainerItemProxy */;
+		};
+		998D0F7B2429484C00A2B6C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = LottieLibraryIOS;
+			targetProxy = 998D0F7A2429484C00A2B6C3 /* PBXContainerItemProxy */;
+		};
+		998D0FB42429489C00A2B6C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = RNFirebase;
+			targetProxy = 998D0FB32429489C00A2B6C3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

@@ -1,37 +1,27 @@
 import {observable, action} from 'mobx';
 import AsyncStorage from '@react-native-community/async-storage';
 import axios from '../Api';
-import { API_KEY } from '../../config';
 
 // navigation service
 import NavigationService from '~/NavigationService';
 
 const defaultUser = {
-  Name: '',
-  Eposta: '',
-  ProfilResmi: '',
-};
-
-const defaultToken = {
-  Username: '',
-  tokenkey: '',
+  UserId: '',
+  UserName: ''
 };
 
 class AuthStore{
-  @observable token = defaultToken;
+  @observable Tokenkey = '';
   @observable deviceToken = '';
   @observable user = defaultUser;
 
-  @action async saveUser(username, user){
+  @action async saveUser(user, deviceToken){
     try{
-      const token = {
-        Username: username,
-        tokenkey: user.Tokenkey
-      };
-
-      await AsyncStorage.setItem('token', JSON.stringify(token));
+      await AsyncStorage.setItem('token', user.TokenKey);
       await AsyncStorage.setItem('user', JSON.stringify(user));
+      await AsyncStorage.setItem('deviceToken', deviceToken);
       await this.setupAuth();
+      NavigationService.navigate('Home');
     }catch (e) {
       console.log(e);
     }
@@ -39,20 +29,21 @@ class AuthStore{
 
   @action async removeUser(){
     try{
-      const { Username } = this.token;
-      await axios.post('Login/DeleteImeiNo',
+      await axios.post('DeviceToken/DeleteDeviceToken',
         {
-          EmpId: Username,
-          device_token: this.deviceToken,
+          DeviceToken: this.deviceToken,
         }
       );
 
       await AsyncStorage.removeItem('token');
       await AsyncStorage.removeItem('user');
-      this.token = defaultToken;
+      await AsyncStorage.removeItem('deviceToken');
+
+      this.token = '';
       this.deviceToken = '';
-      await this.setupAuth();
       this.user = defaultUser;
+
+      NavigationService.navigate('Profil');
 
     }catch (e) {
       console.log(e);
@@ -61,32 +52,33 @@ class AuthStore{
 
   @action async setupAuth(){
     await this.setToken();
+    await this.setDeviceToken();
     await this.setUser();
   }
 
   @action async setToken(){
     try{
       let token = await AsyncStorage.getItem('token');
-      token = JSON.parse(token);
-      if (!token) {
-        NavigationService.navigate('Auth');
-        return false;
-      }
 
       axios.defaults.transformRequest = [...axios.defaults.transformRequest, (data) => {
-        let newData = {...token, ...JSON.parse(data)};
+        let newData = {token, ...JSON.parse(data)};
         return JSON.stringify(newData);
       }];
 
       this.token = token;
-      NavigationService.navigate('App');
     }catch (e) {
       console.log(e);
     }
   }
 
-  @action async setDeviceToken(token){
-    this.deviceToken = token;
+  @action async setDeviceToken(){
+    try{
+      let deviceToken = await AsyncStorage.getItem('deviceToken');
+      this.deviceToken = deviceToken;
+
+    }catch (e) {
+      console.log(e);
+    }
   }
 
   @action async setUser(){

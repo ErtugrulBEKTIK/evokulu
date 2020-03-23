@@ -4,7 +4,7 @@ import PushNotificationIOS from "@react-native-community/push-notification-ios";
 import { ANDROID_SENDER_ID } from '../config';
 
 
-export default new Promise((resolve, reject) => {
+export const initNotification = () => {
 
   firebase.notifications().onNotification((notification) => {
     const {title, body} = notification;
@@ -53,13 +53,16 @@ export default new Promise((resolve, reject) => {
     requestPermissions: true,
   });
 
+};
+
+export const getDeviceToken = new Promise((resolve, reject) => {
+
   firebase.messaging().getToken()
     .then(deviceToken => {
       resolve(deviceToken)
     }).catch((e) => {
-      reject(e)
+    reject(e)
   })
-
 
 });
 
