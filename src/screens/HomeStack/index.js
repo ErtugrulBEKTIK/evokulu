@@ -2,8 +2,8 @@ import React from "react";
 import {createStackNavigator} from "react-navigation";
 
 import Home from './Home';
-import Categories from './Categories';
-import Topics from './Topics';
+import Categories from '../ExamStack/Categories';
+import Topics from '../ExamStack/Exams';
 
 import {res} from "~/helpers";
 import Header from '~/components/Header'
@@ -15,18 +15,7 @@ const HomeStack = createStackNavigator({
       header: (<Header title="Anasayfa" renderBackButton={false} />)
     })
   },
-  Categories: {
-    screen: Categories,
-    navigationOptions: ({ navigation }) => ({
-      header: (<Header title="Kategoriler" renderBackButton={true} />)
-    })
-  },
-  Topics: {
-    screen: Topics,
-    navigationOptions: ({ navigation }) => ({
-      header: (<Header title="Konu Seç" renderBackButton={true} />)
-    })
-  }
+
 });
 
 export default HomeStack;

@@ -9,11 +9,11 @@ export default class Home extends Component {
   render() {
     return (
       <Container>
-        <Text style={s.infoTitle}>SINIFLAR</Text>
+        <Text style={s.infoTitle}>Duyurular</Text>
 
         { T.range(1,9).map((no) => (
           <TouchableBox onPress={() => { NavigationService.navigate('Categories'); }} style={s.box} key={no}>
-            <Text style={s.boxText}> {no}. Sınıflar </Text>
+            <Text style={s.boxText}> {no}. Duyuru </Text>
           </TouchableBox>
         )) }
       </Container>

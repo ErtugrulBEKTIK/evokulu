@@ -55,7 +55,7 @@ const App = createBottomTabNavigator({
     })
   }
 }, {
-  initialRouteName: "Profil",
+  initialRouteName: "Yarisma",
   tabBarOptions: {
     activeTintColor: '#384F7D',
     showIcon: true,

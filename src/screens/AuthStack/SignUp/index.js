@@ -1,22 +1,22 @@
 import React, { Component } from 'react';
-import {TextInput, View, StyleSheet, TouchableOpacity, Alert } from 'react-native';
+import {TextInput, View, StyleSheet, TouchableOpacity, Alert, KeyboardAvoidingView } from 'react-native';
 import {Formik} from "formik";
 import LinearGradient from "react-native-linear-gradient";
 import { Text, DismissKeyboardView } from '~/components/my-base';
 import { Ellipse1, Ellipse2, Ellipse3 } from "~/assets/images/vectors";
-import {Spinner} from "native-base";
+import {Icon, Spinner} from "native-base";
 import {inject, observer} from "mobx-react";
 
 import {res} from "~/helpers";
 import validations from "./validations";
 import axios from "~/Api";
-import { getDeviceToken } from "~/Notifications";
 import NavigationService from "~/NavigationService";
+import {NavigationEvents} from "react-navigation";
 
 
 @inject('AuthStore')
 @observer
-export default class SignIn extends Component {
+export default class SignUp extends Component {
 
   handleSubmit = async ({ username, password }, bag) => {
     try {
@@ -27,12 +27,16 @@ export default class SignIn extends Component {
         }
       );
 
-      if (!response.data) {
+      if (response.data[0].StatusCode === 201) {
+        Alert.alert(
+          'Kayıt Başarılı!'
+        );
+        NavigationService.navigate('SignIn');
+      } else if (response.data[0].StatusCode === 400) {
         Alert.alert(
           'Hata',
-          'Giriş bilgileri hatalı.'
+          'Bu kullanıcı adı daha önce alınmış!'
         );
-        return false;
       }
 
       bag.setSubmitting(false);
@@ -54,9 +58,6 @@ export default class SignIn extends Component {
         <Ellipse2 style={s.ellipse2} />
         <Ellipse3 style={s.ellipse3} />
 
-        <Text style={s.title}>
-          Kayıt
-        </Text>
         <Formik
           initialValues={{
             username: '',
@@ -73,47 +74,62 @@ export default class SignIn extends Component {
               errors,
               touched,
               setFieldTouched,
-              isValid,
+              resetForm,
               isSubmitting
             }) => (
             <React.Fragment>
+              <NavigationEvents onWillFocus={resetForm} />
+              <KeyboardAvoidingView behavior={"position"}>
+              <Text style={s.title}>Kayıt</Text>
+              <View>
+                <Text style={s.label}>KULLANICI ADI</Text>
+                <TextInput
+                  returnKeyType={'next'}
+                  onSubmitEditing={() => this.passwordRef.focus()}
+                  onChangeText={handleChange('username')}
+                  value={values.username}
+                  onBlur={() => setFieldTouched('username')}
+                  autoCorrect={false}
+                  autoCapitalize={'none'}
+                  style={s.input}
+                />
+                { (errors.username && touched.username) && <Text style={s.error}> {errors.username} </Text>}
+              </View>
+              <View>
+                <Text style={s.label}>ŞİFRE</Text>
+                <TextInput
+                  ref={ref => this.passwordRef = ref}
+                  onSubmitEditing={() => this.passwordRepeatRef.focus()}
+                  returnKeyType={'next'}
+                  onChangeText={handleChange('password')}
+                  value={values.password}
+                  onBlur={() => setFieldTouched('password')}
+                  autoCapitalize={'none'}
+                  secureTextEntry={true}
+                  blurOnSubmit={false}
+                  style={s.input}
+                />
+                { (errors.password && touched.password) && <Text style={s.error}> {errors.password} </Text>}
 
-              <Text style={s.label}>KULLANICI ADI</Text>
-              <TextInput
-                returnKeyType={'next'}
-                onSubmitEditing={() => this.passwordRef.focus()}
-                onChangeText={handleChange('username')}
-                value={values.username}
-                onBlur={() => setFieldTouched('username')}
-                autoCorrect={false}
-                autoCapitalize={'none'}
-                style={s.input}
-              />
+              </View>
+              <View>
+                <Text style={s.label}>ŞİFREYİ TEKRARLA</Text>
+                <TextInput
+                  ref={ref => this.passwordRepeatRef = ref}
+                  onSubmitEditing={handleSubmit}
+                  returnKeyType={'go'}
+                  onChangeText={handleChange('passwordRepeat')}
+                  value={values.passwordRepeat}
+                  onBlur={() => setFieldTouched('passwordRepeat')}
+                  autoCapitalize={'none'}
+                  secureTextEntry={true}
+                  blurOnSubmit={false}
+                  style={s.input}
+                />
+                { (errors.passwordRepeat && touched.passwordRepeat) && <Text style={s.error}> {errors.passwordRepeat} </Text>}
+              </View>
 
-              <Text style={s.label}>ŞİFRE</Text>
-              <TextInput
-                ref={ref => this.passwordRef = ref}
-                onSubmitEditing={() => alert(JSON.stringify(errors))}
-                returnKeyType={'next'}
-                onChangeText={handleChange('password')}
-                value={values.password}
-                onBlur={() => setFieldTouched('password')}
-                autoCapitalize={'none'}
-                secureTextEntry={true}
-                style={s.input}
-              />
-              <Text style={s.label}>ŞİFREYİ TEKRARLA</Text>
-              <TextInput
-                ref={ref => this.passwordRepeatRef = ref}
-                onSubmitEditing={handleSubmit}
-                returnKeyType={'go'}
-                onChangeText={handleChange('password')}
-                value={values.passwordRepeat}
-                onBlur={() => setFieldTouched('password')}
-                autoCapitalize={'none'}
-                secureTextEntry={true}
-                style={s.input}
-              />
+              </KeyboardAvoidingView>
 
               <View style={{flex: 1, flexDirection: 'row'}}>
                 <TouchableOpacity style={s.buttonC} onPress={handleSubmit}>
@@ -134,6 +150,7 @@ export default class SignIn extends Component {
             </React.Fragment>
           )}
         </Formik>
+
 
         <Text style={s.bottomText}>
           Zaten bir hesabım var?&nbsp;
@@ -166,8 +183,8 @@ const s = StyleSheet.create({
     top: res(290)
   },
   title: {
-    marginTop: res(200),
-    marginBottom: res(50),
+    marginTop: res(180),
+    marginBottom: res(30),
     fontSize: res(30),
     color: '#384F7D'
   },
@@ -194,6 +211,12 @@ const s = StyleSheet.create({
     elevation: 4,
     fontFamily: 'ComicSansMS'
   },
+  error: {
+    position: 'absolute',
+    right: res(5),
+    fontSize: res(12),
+    color: '#ff5f69'
+  },
   buttonC: {
     alignSelf: 'flex-end',
     width: '100%',
@@ -219,7 +242,7 @@ const s = StyleSheet.create({
     color: '#384F7D',
     textAlign: 'center',
     marginTop: res(20),
-    marginBottom: res(70)
+    marginBottom: res(40)
   },
   route: {
     color: '#384F7D',

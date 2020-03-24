@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import {TextInput, View, StyleSheet, TouchableOpacity, Alert} from 'react-native';
+import {TextInput, View, StyleSheet, TouchableOpacity, Alert, KeyboardAvoidingView} from 'react-native';
 import {Formik} from "formik";
 import LinearGradient from "react-native-linear-gradient";
-import { Text } from '~/components/my-base';
+import { Text, DismissKeyboardView } from '~/components/my-base';
 import { Ellipse1, Ellipse2, Ellipse3 } from "~/assets/images/vectors";
 import {Spinner} from "native-base";
 import {inject, observer} from "mobx-react";
+import { NavigationEvents } from "react-navigation";
 
 import {res} from "~/helpers";
 import validations from "./validations";
@@ -26,7 +27,7 @@ export default class SignIn extends Component {
           UserPassword: password,
         }
       );
-
+      bag.resetForm({});
       if (!response.data) {
         Alert.alert(
           'Hata',
@@ -69,18 +70,19 @@ export default class SignIn extends Component {
 
   render() {
     return (
-      <View style={s.container}>
+      <DismissKeyboardView style={s.container}>
+
+
+
         <Ellipse1 style={s.ellipse1} />
         <Ellipse2 style={s.ellipse2} />
         <Ellipse3 style={s.ellipse3} />
 
-        <Text style={s.title}>
-          Giriş
-        </Text>
+
         <Formik
           initialValues={{
-            username: 'ertugrul',
-            password: '1234'
+            username: '',
+            password: ''
           }}
           onSubmit={this.handleSubmit}
           validationSchema={validations}
@@ -92,35 +94,43 @@ export default class SignIn extends Component {
               errors,
               touched,
               setFieldTouched,
-              isValid,
+              resetForm,
               isSubmitting
             }) => (
             <React.Fragment>
-
-              <Text style={s.label}>KULLANICI ADI</Text>
-              <TextInput
-                returnKeyType={'next'}
-                onSubmitEditing={() => this.passwordRef.focus()}
-                onChangeText={handleChange('username')}
-                value={values.username}
-                onBlur={() => setFieldTouched('username')}
-                autoCorrect={false}
-                autoCapitalize={'none'}
-                style={s.input}
-              />
-
-              <Text style={s.label}>ŞİFRE</Text>
-              <TextInput
-                ref={ref => this.passwordRef = ref}
-                onSubmitEditing={handleSubmit}
-                returnKeyType={'go'}
-                onChangeText={handleChange('password')}
-                value={values.password}
-                onBlur={() => setFieldTouched('password')}
-                autoCapitalize={'none'}
-                secureTextEntry={true}
-                style={s.input}
-              />
+              <NavigationEvents onWillFocus={resetForm} />
+              <KeyboardAvoidingView behavior={"position"}>
+                <Text style={s.title}>Giriş</Text>
+                <View>
+                  <Text style={s.label}>KULLANICI ADI</Text>
+                  <TextInput
+                    returnKeyType={'next'}
+                    onSubmitEditing={() => this.passwordRef.focus()}
+                    onChangeText={handleChange('username')}
+                    value={values.username}
+                    onBlur={() => setFieldTouched('username')}
+                    autoCorrect={false}
+                    autoCapitalize={'none'}
+                    style={s.input}
+                  />
+                  { (errors.username && touched.username) && <Text style={s.error}> {errors.username} </Text> }
+                </View>
+                <View>
+                  <Text style={s.label}>ŞİFRE</Text>
+                  <TextInput
+                    ref={ref => this.passwordRef = ref}
+                    onSubmitEditing={handleSubmit}
+                    returnKeyType={'go'}
+                    onChangeText={handleChange('password')}
+                    value={values.password}
+                    onBlur={() => setFieldTouched('password')}
+                    autoCapitalize={'none'}
+                    secureTextEntry={true}
+                    style={s.input}
+                  />
+                  { (errors.password && touched.password) && <Text style={s.error}> {errors.password} </Text>}
+                </View>
+              </KeyboardAvoidingView>
 
               <View style={{flex: 1, flexDirection: 'row'}}>
                 <TouchableOpacity style={s.buttonC} onPress={handleSubmit}>
@@ -149,7 +159,7 @@ export default class SignIn extends Component {
           </Text>
         </Text>
 
-      </View>
+      </DismissKeyboardView>
     );
   }
 }
@@ -202,6 +212,12 @@ const s = StyleSheet.create({
     elevation: 4,
     fontFamily: 'ComicSansMS'
   },
+  error: {
+    position: 'absolute',
+    right: res(5),
+    fontSize: res(12),
+    color: '#ff5f69'
+  },
   buttonC: {
     alignSelf: 'flex-end',
     width: '100%',
@@ -227,7 +243,7 @@ const s = StyleSheet.create({
     color: '#384F7D',
     textAlign: 'center',
     marginTop: res(20),
-    marginBottom: res(70)
+    marginBottom: res(40)
   },
   route: {
     color: '#384F7D',

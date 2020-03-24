@@ -6,23 +6,26 @@ import NavigationService from "~/NavigationService";
 
 export default class Categories extends Component {
 
+  constructor(props) {
+    super(props);
+    this.class = props.navigation.getParam('cls');
+  }
+
   render() {
+
     return (
       <Container>
         <Text style={s.infoTitle}>KATEGORİLER</Text>
 
-        <TouchableBox onPress={() => { NavigationService.navigate('Topics'); }} style={s.box}>
-          <Text style={s.boxText}> Matematik </Text>
-        </TouchableBox>
-        <TouchableBox onPress={() => { NavigationService.navigate('Topics'); }} style={s.box}>
-          <Text style={s.boxText}> Türkçe </Text>
-        </TouchableBox>
-        <TouchableBox onPress={() => { NavigationService.navigate('Topics'); }} style={s.box}>
-          <Text style={s.boxText}> Sosyal Bilgiler </Text>
-        </TouchableBox>
-        <TouchableBox onPress={() => { NavigationService.navigate('Topics'); }} style={s.box}>
-          <Text style={s.boxText}> Fen Bilgisi </Text>
-        </TouchableBox>
+        { this.class.CategoryList.map((category) => (
+          <TouchableBox
+            onPress={() => { NavigationService.navigate('Exams', { category, class: this.class }); }}
+            style={s.box}
+            key={category.$id}
+          >
+            <Text style={s.boxText}> {category.CategoryName} </Text>
+          </TouchableBox>
+        )) }
       </Container>
     );
   }
