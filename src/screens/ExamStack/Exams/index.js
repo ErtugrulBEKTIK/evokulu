@@ -25,7 +25,6 @@ export default class Topics extends Component {
   getClasses = async () => {
 
     const { data: exams } = await axios.post('Exam/GetSearchExam', {
-      Tokenkey: "86805af6-739b-4765-baac-9ac1b62c2bcf",
       ClassId: this.cls.ClassId,
       CategoryId: this.category.CategoryId
     });

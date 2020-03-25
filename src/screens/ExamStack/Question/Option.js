@@ -47,7 +47,7 @@ export default class Option extends Component {
             }
           </View>
           <Text style={[s.text, {color: answerState === 'unanswered' ? '#384F7D' : 'white' }]}>
-            Stephen King Pet Sema
+            { this.props.text }
           </Text>
         </LinearGradient>
 

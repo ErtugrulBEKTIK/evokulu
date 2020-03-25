@@ -1,38 +1,47 @@
 import React from "react";
 import {createStackNavigator} from "react-navigation";
 
-import Question from './Question';
 
 import Header from '~/components/Header'
 import Classes from "./Classes";
 import Categories from "./Categories";
 import Exams from "./Exams";
+import Question from './Question';
+import ExamResult from "./ExamResult";
 
 const ExamStack = createStackNavigator({
   Classes: {
     screen: Classes,
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: {
       header: (<Header title="Sınıflar" />)
-    })
+    }
   },
   Categories: {
     screen: Categories,
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: {
       header: (<Header title="Kategoriler" renderBackButton={true} />)
-    })
+    }
   },
   Exams: {
     screen: Exams,
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: {
       header: (<Header title="Konu Seç" renderBackButton={true} />)
-    })
+    }
   },
   Question: {
     screen: Question,
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: {
       header: (<Header title="Sınav" renderBackButton={false} />)
-    })
+    }
   },
+  ExamResult: {
+    screen: ExamResult,
+    navigationOptions: {
+      header: (<Header title="Sınav Sonucu" renderBackButton={false} />)
+    }
+  },
+},{
+  initialRouteName: 'ExamResult'
 });
 
 export default ExamStack;
