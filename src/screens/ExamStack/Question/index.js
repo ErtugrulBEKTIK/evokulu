@@ -28,8 +28,10 @@ export default class Question extends Component {
   };
 
   componentDidMount() {
-    this.getQuestions()
+    this.getQuestions();
   }
+
+
 
   getQuestions = async () => {
     const { data: questions } = await axios.post('Questions/GetSearchExamQuestions',{

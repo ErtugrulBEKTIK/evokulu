@@ -5,6 +5,10 @@ import {Text, Container, TouchableBox} from '~/components/my-base'
 import NavigationService from "~/NavigationService";
 import axios from "~/Api";
 
+import {inject, observer} from 'mobx-react';
+
+@inject('AuthStore')
+@observer
 export default class Topics extends Component {
 
   constructor(props) {
@@ -35,6 +39,17 @@ export default class Topics extends Component {
 
   };
 
+  redirect = (exam) => {
+    const { token } = this.props.AuthStore;
+
+    if(token){
+      NavigationService.navigate('Question', { exam });
+    }else{
+      NavigationService.navigate('Auth');
+    }
+
+  };
+
   render() {
     const { exams, loading } = this.state;
 
@@ -44,7 +59,7 @@ export default class Topics extends Component {
 
         { exams.map((exam) => (
           <TouchableBox
-            onPress={() => { NavigationService.navigate('Question', { exam }); }}
+            onPress={() => { this.redirect(exam) }}
             style={s.box}
             key={exam.$id}
           >

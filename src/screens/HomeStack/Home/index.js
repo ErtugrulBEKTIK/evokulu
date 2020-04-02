@@ -12,7 +12,7 @@ export default class Home extends Component {
         <Text style={s.infoTitle}>Duyurular</Text>
 
         { T.range(1,9).map((no) => (
-          <TouchableBox onPress={() => { NavigationService.navigate('Categories'); }} style={s.box} key={no}>
+          <TouchableBox style={s.box} key={no}>
             <Text style={s.boxText}> {no}. Duyuru </Text>
           </TouchableBox>
         )) }

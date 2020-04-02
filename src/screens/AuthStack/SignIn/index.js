@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import {TextInput, View, StyleSheet, TouchableOpacity, Alert, KeyboardAvoidingView} from 'react-native';
+import {TextInput, View, StyleSheet, Alert, KeyboardAvoidingView} from 'react-native';
 import {Formik} from "formik";
-import LinearGradient from "react-native-linear-gradient";
-import { Text, DismissKeyboardView } from '~/components/my-base';
+import { Text, DismissKeyboardView, Button } from '~/components/my-base';
 import { Ellipse1, Ellipse2, Ellipse3 } from "~/assets/images/vectors";
 import {Spinner} from "native-base";
 import {inject, observer} from "mobx-react";
@@ -133,18 +132,13 @@ export default class SignIn extends Component {
               </KeyboardAvoidingView>
 
               <View style={{flex: 1, flexDirection: 'row'}}>
-                <TouchableOpacity style={s.buttonC} onPress={handleSubmit}>
-                  <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 10}} style={s.button}
-                                  colors={[ '#BAFB67', '#75ea6b']} locations={[0.01, 0.15]}>
-                    {
-                      isSubmitting
-                        ? <Spinner size={'small'} color={'white'} style={{ height: res(20)}} />
-                        : <Text style={s.buttonText}>GİRİŞ YAP</Text>
-                    }
-
-
-                  </LinearGradient>
-                </TouchableOpacity>
+                <Button style={s.buttonC} onPress={handleSubmit}>
+                  {
+                    isSubmitting
+                      ? <Spinner size={'small'} color={'white'} style={{ height: res(20)}} />
+                      : <Text style={s.buttonText}>GİRİŞ YAP</Text>
+                  }
+                </Button>
               </View>
 
 
@@ -220,15 +214,7 @@ const s = StyleSheet.create({
   },
   buttonC: {
     alignSelf: 'flex-end',
-    width: '100%',
-    shadowColor: 'rgba(71, 55, 255, 0.1)',
-    shadowOpacity: 1,
-    shadowRadius: res(7),
-    shadowOffset: {
-      width: 0,
-      height: res(10)
-    },
-    elevation: 4,
+
   },
   button: {
     borderRadius: res(7),

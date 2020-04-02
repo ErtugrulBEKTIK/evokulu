@@ -1,12 +1,8 @@
 import React from "react";
 import {createStackNavigator} from "react-navigation";
 
-import Home from './Home';
-import Categories from '../ExamStack/Categories';
-import Topics from '../ExamStack/Exams';
-
-import {res} from "~/helpers";
 import Header from '~/components/Header'
+import Home from './Home';
 
 const HomeStack = createStackNavigator({
   Home: {

@@ -11,7 +11,7 @@ const defaultUser = {
 };
 
 class AuthStore{
-  @observable Tokenkey = '';
+  @observable token = '';
   @observable deviceToken = '';
   @observable user = defaultUser;
 

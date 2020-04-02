@@ -8,11 +8,11 @@ export default class Container extends Component {
   render() {
     return (
       <SafeAreaView {...this.props} style={[{flex: 1}, this.props.style]} >
-        <LinearGradient style={s.background} start={{x: 0, y: 0}} end={{x: 1, y: 0.9}} colors={['#EEECFF', '#ffffff']}>
+        <LinearGradient style={s.background } start={{x: 0, y: 0}} end={{x: 1, y: 0.9}} colors={['#EEECFF', '#ffffff']}>
           {
             this.props.loading
               ? <Spinner/>
-              :  <ScrollView style={s.container}>
+              :  <ScrollView style={{paddingHorizontal: this.props.noPadding ? 0 : res(25)}}>
                     { this.props.children }
                   </ScrollView>
           }
@@ -26,8 +26,5 @@ const s = StyleSheet.create({
   background: {
     flex: 1,
     paddingTop: res(80)
-  },
-  container: {
-    paddingHorizontal: res(25),
   },
 });

@@ -25,10 +25,10 @@ export default class Option extends Component {
           colors={bgColors[answerState]} locations={[0.9, 0.1]}
           style={[
             {
-              borderTopRightRadius: no === 1 && res(7),
-              borderTopLeftRadius: no === 1 && res(7),
-              borderBottomLeftRadius: no === 4 && res(7),
-              borderBottomRightRadius: no === 4 && res(7)
+              borderTopRightRadius: no === 1 ? res(7) : 0,
+              borderTopLeftRadius: no === 1 ? res(7) : 0,
+              borderBottomLeftRadius: no === 4 ? res(7) : 0,
+              borderBottomRightRadius: no === 4 ? res(7) : 0
             },
             s.background
           ]}>

@@ -41,7 +41,7 @@ const ExamStack = createStackNavigator({
     }
   },
 },{
-  initialRouteName: 'ExamResult'
+  initialRouteName: 'Classes'
 });
 
 export default ExamStack;

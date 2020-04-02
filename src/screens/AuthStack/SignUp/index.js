@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {TextInput, View, StyleSheet, TouchableOpacity, Alert, KeyboardAvoidingView } from 'react-native';
 import {Formik} from "formik";
-import LinearGradient from "react-native-linear-gradient";
-import { Text, DismissKeyboardView } from '~/components/my-base';
+import { Text, DismissKeyboardView, Button } from '~/components/my-base';
 import { Ellipse1, Ellipse2, Ellipse3 } from "~/assets/images/vectors";
 import {Icon, Spinner} from "native-base";
 import {inject, observer} from "mobx-react";
@@ -132,18 +131,13 @@ export default class SignUp extends Component {
               </KeyboardAvoidingView>
 
               <View style={{flex: 1, flexDirection: 'row'}}>
-                <TouchableOpacity style={s.buttonC} onPress={handleSubmit}>
-                  <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 10}} style={s.button}
-                                  colors={[ '#BAFB67', '#75ea6b']} locations={[0.01, 0.15]}>
-                    {
-                      isSubmitting
-                        ? <Spinner size={'small'} color={'white'} style={{ height: res(20)}} />
-                        : <Text style={s.buttonText}>KAYIT OL</Text>
-                    }
-
-
-                  </LinearGradient>
-                </TouchableOpacity>
+                <Button style={s.buttonC} onPress={handleSubmit}>
+                  {
+                    isSubmitting
+                      ? <Spinner size={'small'} color={'white'} style={{ height: res(20)}} />
+                      : <Text style={s.buttonText}>KAYIT OL</Text>
+                  }
+                </Button>
               </View>
 
 

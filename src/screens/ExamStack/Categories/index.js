@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, Image} from 'react-native';
 import {res} from '~/helpers';
 import {Text, Container, TouchableBox} from '~/components/my-base'
 import NavigationService from "~/NavigationService";
@@ -23,6 +23,7 @@ export default class Categories extends Component {
             style={s.box}
             key={category.$id}
           >
+            <Image style={s.image} source={{uri:category.PictureUrl}} />
             <Text style={s.boxText}> {category.CategoryName} </Text>
           </TouchableBox>
         )) }
@@ -35,16 +36,25 @@ export default class Categories extends Component {
 const s = StyleSheet.create({
   box: {
     marginBottom: res(15),
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   boxText: {
     color: '#384F7D',
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: res(17),
+    marginLeft: res(20)
   },
   infoTitle: {
     color: 'rgba(56, 79, 125, 0.8)',
     fontSize: res(12),
     marginBottom: res(15)
   },
+  image: {
+    resizeMode: 'cover',
+    height: res(90),
+    width: res(70),
+
+  }
 });

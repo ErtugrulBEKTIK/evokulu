@@ -56,7 +56,7 @@ export default class Question extends Component {
             <Text style={s.resultText}>Boş: {blankQ}</Text>
           </View>
         </Box>
-        <TouchableOpacity style={s.buttonC} onPress={() => { NavigationService.navigate('Exams'); }}>
+        <TouchableOpacity style={s.buttonC} onPress={() => { this.props.navigation.pop(2) }}>
           <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 10}} style={s.button}
                           colors={[ '#BAFB67', '#75ea6b']} locations={[0.01, 0.15]}>
             <Text style={s.buttonText}>SINAVLARA DÖN</Text>

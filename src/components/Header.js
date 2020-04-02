@@ -34,10 +34,14 @@ export default class Header extends Component {
           </TouchableOpacity>
         }
         <Text style={s.title}>{this.props.title}</Text>
-        <View style={s.inputContainer}>
-          <Icon name="search" style={s.inputIcon}/>
-          <TextInput style={s.input} placeholder="Ara ..."/>
-        </View>
+        {
+          !this.props.hideSearch &&
+          <View style={s.inputContainer}>
+            <Icon name="search" style={s.inputIcon}/>
+            <TextInput style={s.input} placeholder="Ara ..."/>
+          </View>
+        }
+
       </View>
     );
   }

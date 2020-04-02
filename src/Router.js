@@ -4,14 +4,17 @@ import { res } from './helpers';
 
 import {
   createAppContainer,
-  createBottomTabNavigator
+  createBottomTabNavigator,
+  createSwitchNavigator
 } from 'react-navigation';
 
 
 // Stacks & Screens
 import AuthStack from './screens/AuthStack';
+import ProfileStack from './screens/ProfileStack';
 import HomeStack from './screens/HomeStack';
 import ExamStack from './screens/ExamStack';
+import AskStack from './screens/AskStack';
 import AdviceStack from './screens/AdviceStack';
 
 
@@ -26,7 +29,7 @@ const App = createBottomTabNavigator({
       ),
     })
   },
-  Yarisma: {
+  Exam: {
     screen: ExamStack,
     navigationOptions: ({ navigation }) => ({
       title: 'Yarışma',
@@ -35,7 +38,16 @@ const App = createBottomTabNavigator({
       ),
     })
   },
-  Tavsiyeler: {
+  Ask: {
+    screen: AskStack,
+    navigationOptions: ({ navigation }) => ({
+      title: 'Yarışma',
+      tabBarIcon: ({ tintColor }) => (
+        <Icon style={{color: tintColor, fontSize: res(25)}} name='book' />
+      ),
+    })
+  },
+  Advice: {
     screen: AdviceStack,
     navigationOptions: ({ navigation }) => ({
       title: 'Tavsiyeler',
@@ -44,18 +56,17 @@ const App = createBottomTabNavigator({
       ),
     })
   },
-  Profil: {
-    screen: AuthStack,
+  Profile: {
+    screen: ProfileStack,
     navigationOptions: ({ navigation }) => ({
-      tabBarVisible: false,
       title: 'Profil',
       tabBarIcon: ({ tintColor }) => (
-        <Icon style={{color: tintColor, fontSize: res(25)}} name='notifications' />
+        <Icon style={{color: tintColor, fontSize: res(25)}} name='person' />
       ),
     })
   }
 }, {
-  initialRouteName: "Yarisma",
+  initialRouteName: "Ask",
   tabBarOptions: {
     activeTintColor: '#384F7D',
     showIcon: true,
@@ -79,5 +90,14 @@ const App = createBottomTabNavigator({
   }
 });
 
+const SwitchNavigator = createSwitchNavigator(
+  {
+    App,
+    Auth: AuthStack,
+  },
+  {
+    initialRouteName: 'App',
+  }
+);
 
-export default createAppContainer(App);
+export default createAppContainer(SwitchNavigator);
