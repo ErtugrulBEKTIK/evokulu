@@ -67,6 +67,8 @@
 		<string>ComicSansMS_italic.ttf</string>
 		<string>ComicSansMS_bold_italic.ttf</string>
 		<string>ComicSansMS_bold.ttf</string>
+		<string>Helvetica.ttf</string>
+		<string>HelveticaRounded-bold.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

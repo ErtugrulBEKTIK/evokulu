@@ -16,6 +16,7 @@ const s = StyleSheet.create({
   text: {
     fontSize: res(16),
     color: 'black',
-    fontFamily: 'ComicSansMS'
+    fontWeight: 'bold',
+    fontFamily: 'Helvetica'
   }
 });

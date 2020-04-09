@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import {StyleSheet, Image} from 'react-native';
-import {res} from '~/helpers';
+import {StyleSheet, Image, View} from 'react-native';
+import {res, T} from '~/helpers';
 import {Text, Container, TouchableBox} from '~/components/my-base'
 import NavigationService from "~/NavigationService";
+import {Question} from "~/assets/images/vectors";
 
 export default class Categories extends Component {
 
@@ -12,21 +13,41 @@ export default class Categories extends Component {
   }
 
   render() {
-
+    const list = this.class.CategoryList;
+    const noInRow = 2;
     return (
-      <Container>
-        <Text style={s.infoTitle}>KATEGORİLER</Text>
+      <Container scroll>
+        {
+          T.range(1, Math.ceil(list.length / noInRow)).map((i) => (
+            <View style={s.triple} key={i.toString()}>
+              {
+                T.range(0, noInRow-1).map((k) => {
+                  const index = (i-1)*noInRow +k;
 
-        { this.class.CategoryList.map((category) => (
-          <TouchableBox
-            onPress={() => { NavigationService.navigate('Exams', { category, class: this.class }); }}
-            style={s.box}
-            key={category.$id}
-          >
-            <Image style={s.image} source={{uri:category.PictureUrl}} />
-            <Text style={s.boxText}> {category.CategoryName} </Text>
-          </TouchableBox>
-        )) }
+                  if(index < list.length){
+                    const category = list[index];
+                    return (
+                      <TouchableBox
+                        onPress={() => { NavigationService.navigate('Topics', { category, class: this.class }); }}
+                        style={[s.box, {marginRight: k === noInRow-1 ? 0 : res(20)}]}
+                        key={category.$id}
+                      >
+                        <View style={s.iconC}>
+                          <Question/>
+                        </View>
+                        <Text style={s.boxText}> {category.CategoryName} </Text>
+                      </TouchableBox>
+                    )
+                  }else {
+                    return <View key={index.toString()} style={{flex: 1}} />
+                  }
+
+                })
+              }
+            </View>
+          ))
+
+        }
       </Container>
     );
   }
@@ -34,22 +55,34 @@ export default class Categories extends Component {
 
 
 const s = StyleSheet.create({
-  box: {
-    marginBottom: res(15),
+  triple: {
+    flex: 1,
     flexDirection: 'row',
-    alignItems: 'center'
+  },
+  box: {
+    flex: 1,
+    alignItems: 'center',
+    marginBottom: res(15),
+    paddingHorizontal: 0
   },
   boxText: {
-    color: '#384F7D',
+
+    color: '#DC6929',
     textAlign: 'center',
+    alignSelf: 'center',
     fontWeight: 'bold',
-    fontSize: res(17),
-    marginLeft: res(20)
+    fontSize: res(15),
+
+
   },
-  infoTitle: {
-    color: 'rgba(56, 79, 125, 0.8)',
-    fontSize: res(12),
-    marginBottom: res(15)
+  iconC: {
+    width: res(50),
+    height: res(50),
+    borderRadius: res(25),
+    padding: res(8),
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#DC6929'
   },
   image: {
     resizeMode: 'cover',

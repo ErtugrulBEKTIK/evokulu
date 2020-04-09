@@ -1,4 +1,5 @@
 import React from 'react';
+import {View} from "react-native";
 import {Icon} from "native-base";
 import { res } from './helpers';
 
@@ -8,6 +9,8 @@ import {
   createSwitchNavigator
 } from 'react-navigation';
 
+import TabBarIcon from '~/components/TabBarIcon';
+import {Home as HomeIcon, Compass, Question, Announce, User} from '~/assets/images/vectors';
 
 // Stacks & Screens
 import AuthStack from './screens/AuthStack';
@@ -24,53 +27,44 @@ const App = createBottomTabNavigator({
     screen: HomeStack,
     navigationOptions: ({ navigation }) => ({
       title: 'Anasayfa',
-      tabBarIcon: ({ tintColor }) => (
-        <Icon style={{color: tintColor, fontSize: res(25)}} name='home' />
-      ),
+      tabBarIcon: ({ tintColor }) => <TabBarIcon tintColor={tintColor}><HomeIcon/></TabBarIcon>
     })
   },
   Exam: {
     screen: ExamStack,
     navigationOptions: ({ navigation }) => ({
       title: 'Yarışma',
-      tabBarIcon: ({ tintColor }) => (
-        <Icon style={{color: tintColor, fontSize: res(25)}} name='book' />
-      ),
+      tabBarIcon: ({ tintColor }) => <TabBarIcon tintColor={tintColor}><Compass/></TabBarIcon>
     })
   },
   Ask: {
     screen: AskStack,
     navigationOptions: ({ navigation }) => ({
       title: 'Yarışma',
-      tabBarIcon: ({ tintColor }) => (
-        <Icon style={{color: tintColor, fontSize: res(25)}} name='book' />
-      ),
+      tabBarIcon: ({ tintColor }) => <TabBarIcon tintColor={tintColor}><Question/></TabBarIcon>
     })
   },
   Advice: {
     screen: AdviceStack,
     navigationOptions: ({ navigation }) => ({
       title: 'Tavsiyeler',
-      tabBarIcon: ({ tintColor }) => (
-        <Icon style={{color: tintColor, fontSize: res(25)}} name='star' />
-      ),
+      tabBarIcon: ({ tintColor }) => <TabBarIcon tintColor={tintColor}><Announce/></TabBarIcon>,
     })
   },
   Profile: {
     screen: ProfileStack,
     navigationOptions: ({ navigation }) => ({
       title: 'Profil',
-      tabBarIcon: ({ tintColor }) => (
-        <Icon style={{color: tintColor, fontSize: res(25)}} name='person' />
-      ),
+      tabBarIcon: ({ tintColor }) => <TabBarIcon tintColor={tintColor}><User/></TabBarIcon>
     })
   }
 }, {
-  initialRouteName: "Ask",
+  initialRouteName: "Exam",
   tabBarOptions: {
-    activeTintColor: '#384F7D',
+    activeTintColor: '#DC6929',
     showIcon: true,
-    inactiveTintColor: 'rgba(56, 79, 125, 0.45);',
+    showLabel: false,
+    inactiveTintColor: '#E8DAD1',
     labelStyle: {
       fontFamily: 'ComicSansMS'
     },

@@ -1,30 +1,33 @@
 import React, { Component } from 'react';
-import {View, TextInput} from "react-native";
+import {View} from "react-native";
 import { StyleSheet, TouchableOpacity, Platform } from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import { res } from '~/helpers';
 import { Text } from '~/components/my-base'
 import {Icon} from "native-base";
 import NavigationService from "~/NavigationService";
+import {Logo, Announce, Home, Compass, Question, User} from '~/assets/images/vectors';
+
+
 
 export default class Header extends Component {
 
-  componentDidMount() {
-    console.log(this.props.navigation);
-  }
 
   render() {
+    const { renderBackButton, title, icon} = this.props;
+    const icons = {
+      announce: Announce,
+      home: Home,
+      compass: Compass,
+      question: Question,
+      user: User,
+    };
+    const PageIcon = icons[icon ? icon : 'home'];
     return (
       <View style={s.headerC}>
-        <View style={s.backgroundC}>
-          <LinearGradient style={s.background}
-                          start={{x: 0, y: 1}} end={{x: 1, y: 0}}
-                          locations={[0.1, 0.55]}
-                          colors={['#A098F3', '#776CE7']}/>
-        </View>
+        <View style={s.background} />
 
         {
-          this.props.renderBackButton &&
+          renderBackButton &&
           <TouchableOpacity
             onPress={() => { NavigationService.goBack()}}
             style={s.returnButton}>
@@ -33,14 +36,14 @@ export default class Header extends Component {
             />
           </TouchableOpacity>
         }
-        <Text style={s.title}>{this.props.title}</Text>
-        {
-          !this.props.hideSearch &&
-          <View style={s.inputContainer}>
-            <Icon name="search" style={s.inputIcon}/>
-            <TextInput style={s.input} placeholder="Ara ..."/>
+        <View style={s.titleC}>
+          <View style={s.iconC}>
+            <PageIcon style={s.pageIcon}/>
           </View>
-        }
+          <Text style={s.title}>{title}</Text>
+        </View>
+
+        <Logo style={s.logo} />
 
       </View>
     );
@@ -49,22 +52,25 @@ export default class Header extends Component {
 
 const s = StyleSheet.create({
   headerC: {
-    height: res(120),
+    height: res(150),
     justifyContent: 'center',
-  },
-  backgroundC: {
-    height: res(200),
-    width: res(200),
-    borderRadius: res(200),
-    alignSelf: 'center',
-    transform: [
-      {scaleX: 4}
-    ],
-    overflow: 'hidden',
+    backgroundColor: '#c3312a',
   },
   background: {
     flex: 1,
+    backgroundColor: 'white',
+    borderBottomRightRadius: res(30),
+    borderBottomLeftRadius: res(30),
+    shadowColor: 'rgba(0, 0, 0, 0.1)',
+    shadowOpacity: 1,
+    shadowRadius: res(7),
+    shadowOffset: {
+      width:0,
+      height: res(10)
+    },
+    elevation: 4
   },
+
   returnButton: {
     position: 'absolute',
     top: res(50),
@@ -72,45 +78,37 @@ const s = StyleSheet.create({
   },
   returnButtonIcon: {
     fontSize: res(36),
-    color: '#fff'
+    color: '#DC6929'
   },
+
+  titleC: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    position: 'absolute',
+    alignSelf: 'flex-start',
+    bottom: res(15),
+    left: res(15),
+  },
+  iconC: {
+    width: res(25),
+    height: res(25),
+    borderRadius: res(12.5),
+    padding: res(6),
+    marginRight: res(5),
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#DC6929'
+  },
+
   title: {
+    color: '#DC6929',
+    fontSize: res(14)
+  },
+  logo: {
     position: 'absolute',
     alignSelf: 'center',
-    top: res(75),
-    color: 'white',
-    fontSize: res(19)
-  },
-  inputContainer: {
-    position: 'absolute',
-    width: '100%',
-    top: res(110),
-    padding: res(25)
-  },
-  input: {
-    height: res(40),
-    padding: res(10),
-    paddingLeft: res(45),
-    backgroundColor: 'white',
-    width: '100%',
-    borderRadius: res(7),
-    shadowColor: 'rgba(71, 55, 255, 0.08)',
-    shadowOpacity: 1,
-    shadowRadius: res(7),
-    shadowOffset: {
-      width: 0,
-      height: res(10)
-    },
-    elevation: 4,
-    fontFamily: 'ComicSansMS'
-  },
-  inputIcon: {
-    color: '#ddd',
-    fontSize: res(25),
-    position: 'absolute',
-    top: res(31),
-    left: res(35),
-    zIndex: 5,
-    elevation: 5,
+    top: res(50),
+    width: res(70),
+    height: res(70)
   }
 });

@@ -1,21 +1,34 @@
 import React, {Component} from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {res, T} from '~/helpers';
 import {Text, Container, TouchableBox} from '~/components/my-base'
 import NavigationService from '~/NavigationService';
+import {Logo, Announce, Question} from '~/assets/images/vectors';
 
 export default class Home extends Component {
 
   render() {
     return (
       <Container>
-        <Text style={s.infoTitle}>Duyurular</Text>
 
-        { T.range(1,9).map((no) => (
-          <TouchableBox style={s.box} key={no}>
-            <Text style={s.boxText}> {no}. Duyuru </Text>
+        <Text style={s.welcome}>Hoş Geldin</Text>
+        <Text style={s.name}>Metehan Altaş</Text>
+
+        <View style={s.triple}>
+          <TouchableBox style={s.box}>
+            <View style={s.iconC}>
+              <Question/>
+            </View>
+            <Text style={s.boxText}> Dersler </Text>
           </TouchableBox>
-        )) }
+          <TouchableBox style={s.box}>
+            <Text style={s.boxText}> Dersler </Text>
+          </TouchableBox>
+          <TouchableBox style={[s.box, {marginRight: 0}]}>
+            <Text style={s.boxText}> Dersler </Text>
+          </TouchableBox>
+        </View>
+
       </Container>
     );
   }
@@ -23,18 +36,38 @@ export default class Home extends Component {
 
 
 const s = StyleSheet.create({
+  triple: {
+    flex: 1,
+    flexDirection: 'row',
+  },
   box: {
+    flex: 1,
+    alignItems: 'center',
+    marginRight: res(15),
     marginBottom: res(15),
   },
   boxText: {
-    color: '#384F7D',
+    color: '#DC6929',
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: res(17),
+    height: res(20),
   },
-  infoTitle: {
-    color: 'rgba(56, 79, 125, 0.8)',
-    fontSize: res(12),
-    marginBottom: res(15)
+  iconC: {
+    width: res(50),
+    height: res(50),
+    borderRadius: res(25),
+    padding: res(8),
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#DC6929'
+  },
+  welcome: {
+    color: 'white',
+    fontWeight: 'normal'
+  },
+  name: {
+    color: 'white',
+    marginBottom: res(20)
   },
 });

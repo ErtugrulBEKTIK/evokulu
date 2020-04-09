@@ -1,22 +1,25 @@
 import React, { Component } from 'react';
-import {SafeAreaView, ScrollView, StyleSheet, TouchableOpacity} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet, View, Dimensions} from 'react-native';
 import {res} from "~/helpers";
 import LinearGradient from "react-native-linear-gradient";
 import { Spinner } from "~/components/my-base/index";
+import { Bg } from "~/assets/images/vectors";
 
 export default class Container extends Component {
+
   render() {
+    const containerStyle = [{paddingHorizontal: this.props.noPadding ? 0 : res(15)}, s.container];
+
     return (
       <SafeAreaView {...this.props} style={[{flex: 1}, this.props.style]} >
-        <LinearGradient style={s.background } start={{x: 0, y: 0}} end={{x: 1, y: 0.9}} colors={['#EEECFF', '#ffffff']}>
-          {
-            this.props.loading
-              ? <Spinner/>
-              :  <ScrollView style={{paddingHorizontal: this.props.noPadding ? 0 : res(25)}}>
-                    { this.props.children }
-                  </ScrollView>
-          }
-        </LinearGradient>
+        <Bg style={s.background}/>
+        {
+          this.props.loading
+            ? <Spinner/>
+            : <ScrollView style={containerStyle} scrollEnabled={!!this.props.scroll}>
+                { this.props.children }
+              </ScrollView>
+        }
       </SafeAreaView>
     );
   }
@@ -24,7 +27,11 @@ export default class Container extends Component {
 
 const s = StyleSheet.create({
   background: {
-    flex: 1,
-    paddingTop: res(80)
+    position: 'absolute',
+    width: Math.round(Dimensions.get('window').width),
+    height: Math.round(Dimensions.get('window').width * 16/9),
   },
+  container: {
+    paddingTop: res(30),
+  }
 });

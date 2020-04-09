@@ -7,9 +7,9 @@ import Home from './Home';
 const HomeStack = createStackNavigator({
   Home: {
     screen: Home,
-    navigationOptions: ({ navigation }) => ({
-      header: (<Header title="Anasayfa" renderBackButton={false} />)
-    })
+    navigationOptions: {
+      header: <Header title="Anasayfa" renderBackButton={false} icon="home" />
+    }
   },
 
 });

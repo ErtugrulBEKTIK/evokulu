@@ -10,9 +10,9 @@ import Header from '~/components/Header'
 const AdviceStack = createStackNavigator({
   Advice: {
     screen: Advice,
-    navigationOptions: ({ navigation }) => ({
-      header: (<Header title="Tavsiyeler" renderBackButton={false} />)
-    })
+    navigationOptions: {
+      header: <Header title="Tavsiyeler" renderBackButton={false} icon="announce" />
+    }
   }
 });
 

@@ -1,28 +1,18 @@
-import _Star from './star.svg';
-import _Cloud from './cloud.svg';
-import _Tag from './tag.svg';
-import _Moon from './moon.svg';
-import _Ellipse1 from './ellipse1.svg';
-import _Ellipse2 from './ellipse2.svg';
-import _Ellipse3 from './ellipse3.svg';
-import _Info from './info.svg';
-import _Bell from './bell.svg';
-import _Lock from './lock.svg';
-import _Support from './support.svg';
 import _User from './user.svg';
-import _RightArrow from './rightArrow.svg';
+import _Bg from './bg.svg';
+import _Announce from './announce.svg';
+import _Compass from './compass.svg';
+import _Home from './home.svg';
+import _Question from './question.svg';
+import _Logo from './logo.svg';
 
 
-export const Star = _Star;
-export const Cloud = _Cloud;
-export const Tag = _Tag;
-export const Moon = _Moon;
-export const Ellipse1 = _Ellipse1;
-export const Ellipse2 = _Ellipse2;
-export const Ellipse3 = _Ellipse3;
-export const Info = _Info;
-export const Bell = _Bell;
-export const Lock = _Lock;
-export const Support = _Support;
+export const Logo = _Logo;
+export const Question = _Question;
+export const Home = _Home;
+export const Compass = _Compass;
+export const Announce = _Announce;
 export const User = _User;
-export const RightArrow = _RightArrow;
+export const Bg = _Bg;
+
+

@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import {res, T} from '~/helpers';
-import {Text, Container, TouchableBox} from '~/components/my-base'
+import {Text, Container, TouchableBar} from '~/components/my-base'
 import NavigationService from '~/NavigationService';
 import axios from "~/Api";
+import Sound from "react-native-sound";
 
 export default class Classes extends Component {
 
@@ -13,7 +14,8 @@ export default class Classes extends Component {
   };
 
   componentDidMount() {
-    this.getClasses()
+    this.getClasses();
+
   }
 
   getClasses = async () => {
@@ -24,19 +26,18 @@ export default class Classes extends Component {
   render() {
     const { classes, loading } = this.state;
     return (
-      <Container loading={loading}>
-        <Text style={s.infoTitle}>SINIFLAR</Text>
-
+      <Container loading={loading} scroll>
         { classes.map((cls) => (
-          <TouchableBox
+          <TouchableBar
             onPress={() => { NavigationService.navigate('Categories', { cls }); }}
             style={s.box}
             key={cls.$id}
           >
             <Text style={s.boxText}> {cls.ClassName} </Text>
-          </TouchableBox>
+          </TouchableBar>
         )) }
 
+        <View style={{marginBottom: res(50)}}/>
       </Container>
     );
   }
@@ -46,16 +47,13 @@ export default class Classes extends Component {
 const s = StyleSheet.create({
   box: {
     marginBottom: res(15),
+    width: res(200),
+    alignSelf: 'center'
   },
   boxText: {
-    color: '#384F7D',
+    color: '#C0292B',
     textAlign: 'center',
     fontWeight: 'bold',
-    fontSize: res(17),
-  },
-  infoTitle: {
-    color: 'rgba(56, 79, 125, 0.8)',
-    fontSize: res(12),
-    marginBottom: res(15)
+    fontSize: res(15),
   }
 });
