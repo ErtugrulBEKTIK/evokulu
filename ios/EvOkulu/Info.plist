@@ -69,6 +69,13 @@
 		<string>ComicSansMS_bold.ttf</string>
 		<string>Helvetica.ttf</string>
 		<string>HelveticaRounded-bold.ttf</string>
+		<string>HelveticaCompressed.ttf</string>
+		<string>HelveticaCondensed.ttf</string>
+		<string>Helvetica_compressed.ttf</string>
+		<string>Helvetica_condensed.ttf</string>
+		<string>Helvetica_rounded-bold.ttf</string>
+		<string>Helvetica_rounded_bold.ttf</string>
+		<string>HelveticaRounded_bold.ttf</string>
 	</array>
 	<key>UIBackgroundModes</key>
 	<array>

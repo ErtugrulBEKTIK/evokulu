@@ -2,18 +2,29 @@ import React, { Component } from 'react';
 import {View} from "react-native";
 import { StyleSheet } from 'react-native';
 import { res } from '~/helpers';
+import {Announce, Compass, Home, Question, User} from "~/assets/images/vectors";
 
 
 
 export default class TabBarIcon extends Component {
 
   render() {
-    const { children, tintColor } = this.props;
+
+    const { icon, tintColor } = this.props;
+    const icons = {
+      announce: Announce,
+      home: Home,
+      compass: Compass,
+      question: Question,
+      user: User,
+    };
+    const Icon = icons[icon ? icon : 'home'];
+
     return (
       <>
         <View style={[s.hat, {display: tintColor === '#DC6929' ? 'flex' : 'none' }]} />
         <View style={[s.iconC, {backgroundColor: tintColor}]}>
-          {children}
+          <Icon />
         </View>
       </>
     );

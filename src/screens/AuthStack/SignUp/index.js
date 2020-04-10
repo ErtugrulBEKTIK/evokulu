@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import {TextInput, View, StyleSheet, TouchableOpacity, Alert, KeyboardAvoidingView } from 'react-native';
+import {TextInput, View, StyleSheet, Alert, KeyboardAvoidingView, Dimensions, TouchableOpacity} from 'react-native';
 import {Formik} from "formik";
-import { Text, DismissKeyboardView, Button } from '~/components/my-base';
-import { Ellipse1, Ellipse2, Ellipse3 } from "~/assets/images/vectors";
+import {Text, DismissKeyboardView, TouchableBar, Box} from '~/components/my-base';
 import {Icon, Spinner} from "native-base";
 import {inject, observer} from "mobx-react";
 
@@ -11,6 +10,8 @@ import validations from "./validations";
 import axios from "~/Api";
 import NavigationService from "~/NavigationService";
 import {NavigationEvents} from "react-navigation";
+import {Bg, Logo2} from "~/assets/images/vectors";
+import {getDeviceToken} from "~/Notifications";
 
 
 @inject('AuthStore')
@@ -27,10 +28,38 @@ export default class SignUp extends Component {
       );
 
       if (response.data[0].StatusCode === 201) {
-        Alert.alert(
-          'Kayıt Başarılı!'
+
+        const response = await axios.post('Login/UserLogin',
+          {
+            UserName: username,
+            UserPassword: password,
+          }
         );
-        NavigationService.navigate('SignIn');
+        bag.resetForm({});
+
+        const user = response.data[0];
+        const DeviceToken = await getDeviceToken;
+
+        // Save user's device token
+        const tokenResult = await axios.post('DeviceToken/InsertDeviceToken',
+          {
+            tokenkey: user.TokenKey,
+            UserId: user.UserId,
+            DeviceToken
+          }
+        );
+
+        if (!tokenResult.data) {
+          Alert.alert(
+            'Hata',
+            'Sorun oluştu.'
+          );
+          return false;
+        }
+
+        this.props.AuthStore.saveUser(user, DeviceToken);
+
+
       } else if (response.data[0].StatusCode === 400) {
         Alert.alert(
           'Hata',
@@ -53,10 +82,7 @@ export default class SignUp extends Component {
   render() {
     return (
       <DismissKeyboardView style={s.container}>
-        <Ellipse1 style={s.ellipse1} />
-        <Ellipse2 style={s.ellipse2} />
-        <Ellipse3 style={s.ellipse3} />
-
+        <Bg style={s.background}/>
         <Formik
           initialValues={{
             username: '',
@@ -79,167 +105,154 @@ export default class SignUp extends Component {
             <React.Fragment>
               <NavigationEvents onWillFocus={resetForm} />
               <KeyboardAvoidingView behavior={"position"}>
-              <Text style={s.title}>Kayıt</Text>
-              <View>
-                <Text style={s.label}>KULLANICI ADI</Text>
-                <TextInput
-                  returnKeyType={'next'}
-                  onSubmitEditing={() => this.passwordRef.focus()}
-                  onChangeText={handleChange('username')}
-                  value={values.username}
-                  onBlur={() => setFieldTouched('username')}
-                  autoCorrect={false}
-                  autoCapitalize={'none'}
-                  style={s.input}
-                />
-                { (errors.username && touched.username) && <Text style={s.error}> {errors.username} </Text>}
-              </View>
-              <View>
-                <Text style={s.label}>ŞİFRE</Text>
-                <TextInput
-                  ref={ref => this.passwordRef = ref}
-                  onSubmitEditing={() => this.passwordRepeatRef.focus()}
-                  returnKeyType={'next'}
-                  onChangeText={handleChange('password')}
-                  value={values.password}
-                  onBlur={() => setFieldTouched('password')}
-                  autoCapitalize={'none'}
-                  secureTextEntry={true}
-                  blurOnSubmit={false}
-                  style={s.input}
-                />
-                { (errors.password && touched.password) && <Text style={s.error}> {errors.password} </Text>}
+                <TouchableOpacity
+                  onPress={() => { NavigationService.goBack()}}
+                  style={s.returnButton}>
+                  <Icon style={s.returnButtonIcon}
+                        name="arrow-round-back"
+                  />
+                </TouchableOpacity>
+                <Logo2 style={s.logo}/>
+                <Box style={s.box}>
+                  <View>
+                    <Text style={s.label}>Kullanıcı Adı</Text>
+                    <TextInput
+                      returnKeyType={'next'}
+                      onSubmitEditing={() => this.passwordRef.focus()}
+                      onChangeText={handleChange('username')}
+                      value={values.username}
+                      onBlur={() => setFieldTouched('username')}
+                      autoCorrect={false}
+                      autoCapitalize={'none'}
+                      style={s.input}
+                    />
+                    { (errors.username && touched.username) && <Text style={s.error}> {errors.username} </Text>}
+                  </View>
+                  <View>
+                    <Text style={s.label}>Şifre</Text>
+                    <TextInput
+                      ref={ref => this.passwordRef = ref}
+                      onSubmitEditing={() => this.passwordRepeatRef.focus()}
+                      returnKeyType={'next'}
+                      onChangeText={handleChange('password')}
+                      value={values.password}
+                      onBlur={() => setFieldTouched('password')}
+                      autoCapitalize={'none'}
+                      secureTextEntry={true}
+                      blurOnSubmit={false}
+                      style={s.input}
+                    />
+                    { (errors.password && touched.password) && <Text style={s.error}> {errors.password} </Text>}
 
-              </View>
-              <View>
-                <Text style={s.label}>ŞİFREYİ TEKRARLA</Text>
-                <TextInput
-                  ref={ref => this.passwordRepeatRef = ref}
-                  onSubmitEditing={handleSubmit}
-                  returnKeyType={'go'}
-                  onChangeText={handleChange('passwordRepeat')}
-                  value={values.passwordRepeat}
-                  onBlur={() => setFieldTouched('passwordRepeat')}
-                  autoCapitalize={'none'}
-                  secureTextEntry={true}
-                  blurOnSubmit={false}
-                  style={s.input}
-                />
-                { (errors.passwordRepeat && touched.passwordRepeat) && <Text style={s.error}> {errors.passwordRepeat} </Text>}
-              </View>
+                  </View>
+                  <View>
+                    <Text style={s.label}>Şifreyi Tekrarla</Text>
+                    <TextInput
+                      ref={ref => this.passwordRepeatRef = ref}
+                      onSubmitEditing={handleSubmit}
+                      returnKeyType={'go'}
+                      onChangeText={handleChange('passwordRepeat')}
+                      value={values.passwordRepeat}
+                      onBlur={() => setFieldTouched('passwordRepeat')}
+                      autoCapitalize={'none'}
+                      secureTextEntry={true}
+                      blurOnSubmit={false}
+                      style={s.input}
+                    />
+                    { (errors.passwordRepeat && touched.passwordRepeat) && <Text style={s.error}> {errors.passwordRepeat} </Text>}
+                  </View>
 
+                  <TouchableBar style={s.button} onPress={handleSubmit}>
+                    {
+                      isSubmitting
+                        ? <Spinner size={'small'} color={'white'} style={{ height: res(20)}} />
+                        : <Text style={s.buttonText}>KAYIT OL</Text>
+                    }
+                  </TouchableBar>
+                </Box>
               </KeyboardAvoidingView>
-
-              <View style={{flex: 1, flexDirection: 'row'}}>
-                <Button style={s.buttonC} onPress={handleSubmit}>
-                  {
-                    isSubmitting
-                      ? <Spinner size={'small'} color={'white'} style={{ height: res(20)}} />
-                      : <Text style={s.buttonText}>KAYIT OL</Text>
-                  }
-                </Button>
-              </View>
-
-
             </React.Fragment>
           )}
         </Formik>
-
-
-        <Text style={s.bottomText}>
-          Zaten bir hesabım var?&nbsp;
-          <Text style={s.route} onPress={() => { NavigationService.navigate('SignIn'); }}>
-            Giriş
-          </Text>
-        </Text>
       </DismissKeyboardView>
     );
   }
 }
 
 const s = StyleSheet.create({
+  background: {
+    position: 'absolute',
+    width: Math.round((Dimensions.get('window').height+100) * 9/16),
+    height: Math.round(Dimensions.get('window').height+100),
+  },
   container: {
     flex: 1,
-    backgroundColor: '#f7f9fe',
     paddingHorizontal: res(20),
   },
-  ellipse1: {
+  returnButton: {
     position: 'absolute',
-    right: 0,
-    top: res(130),
+    top: res(30)
   },
-  ellipse2: {
-    position: 'absolute'
+  returnButtonIcon: {
+    fontSize: res(36),
+    color: 'white'
   },
-  ellipse3: {
-    position: 'absolute',
-    right: res(80),
-    top: res(290)
-  },
-  title: {
-    marginTop: res(180),
+  logo: {
+    marginTop: res(100),
     marginBottom: res(30),
-    fontSize: res(30),
-    color: '#384F7D'
+    alignSelf: 'center',
+    width: res(100),
+    height: res(100)
+  },
+  box: {
+    backgroundColor: '#E8DAD1',
+    minHeight: res(150),
+    padding: res(30),
+    marginHorizontal: res(20),
+    marginBottom: res(20),
+    borderRadius: res(40)
   },
   label: {
-    fontSize: res(12),
-    color: 'rgba(68, 89, 132, 0.3)',
+    marginLeft: res(15),
     marginBottom: res(5),
+    fontWeight: 'normal',
+    fontSize: res(14),
+    color: '#DC6929'
   },
   input: {
-    height: res(50),
+    height: res(40),
     padding: res(10),
-    marginBottom: res(20),
-    backgroundColor: 'white',
-    color: '#7e8dab',
-    width: '100%',
-    borderRadius: res(7),
-    shadowColor: 'rgba(71, 55, 255, 0.08)',
-    shadowOpacity: 1,
-    shadowRadius: res(7),
-    shadowOffset: {
-      width: 0,
-      height: res(10)
-    },
-    elevation: 4,
-    fontFamily: 'ComicSansMS'
+    marginBottom: res(10),
+    backgroundColor: '#C1AC9A',
+    color: '#545757',
+    borderRadius: res(20),
+    fontFamily: 'Helvetica'
   },
   error: {
     position: 'absolute',
-    right: res(5),
+    right: res(10),
+    top: res(35),
     fontSize: res(12),
-    color: '#ff5f69'
+    color: '#c3312a'
   },
-  buttonC: {
-    alignSelf: 'flex-end',
-    width: '100%',
-    shadowColor: 'rgba(71, 55, 255, 0.1)',
-    shadowOpacity: 1,
-    shadowRadius: res(7),
-    shadowOffset: {
-      width: 0,
-      height: res(10)
-    },
-    elevation: 4,
-  },
+
   button: {
-    borderRadius: res(7),
-    padding: res(15),
+    backgroundColor: '#DC6929',
+    alignSelf: 'center',
+    width: res(120),
+    marginTop: res(15),
   },
   buttonText: {
     textAlign: 'center',
     color: 'white',
     fontSize: res(15)
   },
-  bottomText: {
-    color: '#384F7D',
-    textAlign: 'center',
-    marginTop: res(20),
-    marginBottom: res(40)
-  },
   route: {
-    color: '#384F7D',
-    textDecorationLine: 'underline'
+    fontSize: res(14),
+    fontWeight: 'normal',
+    color: 'white',
+    fontFamily: 'Helvetica',
+    alignSelf: 'flex-end',
+    marginRight: res(25)
   }
 });

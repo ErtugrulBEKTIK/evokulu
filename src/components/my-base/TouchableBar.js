@@ -14,6 +14,8 @@ export default class TouchableBar extends Component {
 
 const s = StyleSheet.create({
   box: {
+    paddingHorizontal: res(8),
+    flexDirection: 'row',
     backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',

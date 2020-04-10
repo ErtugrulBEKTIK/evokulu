@@ -10,56 +10,56 @@ import {
 } from 'react-navigation';
 
 import TabBarIcon from '~/components/TabBarIcon';
-import {Home as HomeIcon, Compass, Question, Announce, User} from '~/assets/images/vectors';
 
 // Stacks & Screens
+import Redirector from './screens/AuthStack/Redirector';
 import AuthStack from './screens/AuthStack';
 import ProfileStack from './screens/ProfileStack';
 import HomeStack from './screens/HomeStack';
 import ExamStack from './screens/ExamStack';
-import AskStack from './screens/AskStack';
-import AdviceStack from './screens/AdviceStack';
+import QuestionStack from './screens/QuestionStack';
+import AnnounceStack from './screens/AnnounceStack';
 
 
 
 const App = createBottomTabNavigator({
   Home: {
     screen: HomeStack,
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: {
       title: 'Anasayfa',
-      tabBarIcon: ({ tintColor }) => <TabBarIcon tintColor={tintColor}><HomeIcon/></TabBarIcon>
-    })
+      tabBarIcon: ({ tintColor }) => <TabBarIcon icon="home" tintColor={tintColor} />
+    }
   },
   Exam: {
     screen: ExamStack,
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: {
       title: 'Yarışma',
-      tabBarIcon: ({ tintColor }) => <TabBarIcon tintColor={tintColor}><Compass/></TabBarIcon>
-    })
+      tabBarIcon: ({ tintColor }) => <TabBarIcon icon="compass" tintColor={tintColor} />
+    }
   },
-  Ask: {
-    screen: AskStack,
-    navigationOptions: ({ navigation }) => ({
+  Question: {
+    screen: QuestionStack,
+    navigationOptions: {
       title: 'Yarışma',
-      tabBarIcon: ({ tintColor }) => <TabBarIcon tintColor={tintColor}><Question/></TabBarIcon>
-    })
+      tabBarIcon: ({ tintColor }) => <TabBarIcon icon="question" tintColor={tintColor} />
+    }
   },
-  Advice: {
-    screen: AdviceStack,
-    navigationOptions: ({ navigation }) => ({
+  Announce: {
+    screen: AnnounceStack,
+    navigationOptions: {
       title: 'Tavsiyeler',
-      tabBarIcon: ({ tintColor }) => <TabBarIcon tintColor={tintColor}><Announce/></TabBarIcon>,
-    })
+      tabBarIcon: ({ tintColor }) => <TabBarIcon icon="announce" tintColor={tintColor} />
+    }
   },
   Profile: {
     screen: ProfileStack,
-    navigationOptions: ({ navigation }) => ({
+    navigationOptions: {
       title: 'Profil',
-      tabBarIcon: ({ tintColor }) => <TabBarIcon tintColor={tintColor}><User/></TabBarIcon>
-    })
+      tabBarIcon: ({ tintColor }) => <TabBarIcon icon="user" tintColor={tintColor} />
+    }
   }
 }, {
-  initialRouteName: "Exam",
+  initialRouteName: "Home",
   tabBarOptions: {
     activeTintColor: '#DC6929',
     showIcon: true,
@@ -86,11 +86,12 @@ const App = createBottomTabNavigator({
 
 const SwitchNavigator = createSwitchNavigator(
   {
+    Redirector,
     App,
     Auth: AuthStack,
   },
   {
-    initialRouteName: 'App',
+    initialRouteName: 'Redirector',
   }
 );
 

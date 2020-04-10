@@ -8,15 +8,17 @@ import { Bg } from "~/assets/images/vectors";
 export default class Container extends Component {
 
   render() {
-    const containerStyle = [{paddingHorizontal: this.props.noPadding ? 0 : res(15)}, s.container];
+    const { noPadding, style, loading, scrolViewRef} = this.props;
+
+    const containerStyle = [{paddingHorizontal: noPadding ? 0 : res(15)}, s.container];
 
     return (
-      <SafeAreaView {...this.props} style={[{flex: 1}, this.props.style]} >
+      <SafeAreaView {...this.props} style={[{flex: 1}, style]} >
         <Bg style={s.background}/>
         {
-          this.props.loading
+          loading
             ? <Spinner/>
-            : <ScrollView style={containerStyle} scrollEnabled={!!this.props.scroll}>
+            : <ScrollView style={containerStyle} ref={ scrolViewRef ? (ref) => { scrolViewRef(ref) } : null } scrollEnabled={!!this.props.scroll}>
                 { this.props.children }
               </ScrollView>
         }
@@ -32,6 +34,7 @@ const s = StyleSheet.create({
     height: Math.round(Dimensions.get('window').width * 16/9),
   },
   container: {
+    flex: 1,
     paddingTop: res(30),
   }
 });

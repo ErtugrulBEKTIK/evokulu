@@ -21,7 +21,6 @@ class AuthStore{
       await AsyncStorage.setItem('user', JSON.stringify(user));
       await AsyncStorage.setItem('deviceToken', deviceToken);
       await this.setupAuth();
-      NavigationService.navigate('Home');
     }catch (e) {
       console.log(e);
     }
@@ -43,7 +42,7 @@ class AuthStore{
       this.deviceToken = '';
       this.user = defaultUser;
 
-      NavigationService.navigate('Profil');
+      NavigationService.navigate('Auth');
 
     }catch (e) {
       console.log(e);
@@ -51,14 +50,19 @@ class AuthStore{
   }
 
   @action async setupAuth(){
-    await this.setToken();
     await this.setDeviceToken();
     await this.setUser();
+    await this.setToken();
   }
 
   @action async setToken(){
     try{
       let token = await AsyncStorage.getItem('token');
+
+      if (!token) {
+        NavigationService.navigate('Auth');
+        return false;
+      }
 
       axios.defaults.transformRequest = [...axios.defaults.transformRequest, (data) => {
         let newData = {token, ...JSON.parse(data)};
@@ -66,6 +70,7 @@ class AuthStore{
       }];
 
       this.token = token;
+      NavigationService.navigate('App');
     }catch (e) {
       console.log(e);
     }

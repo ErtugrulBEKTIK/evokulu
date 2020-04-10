@@ -63,9 +63,6 @@ const s = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center'
   },
-  shape: {
-
-  },
   letter: {
     marginTop: -res(2),
     color: 'white'

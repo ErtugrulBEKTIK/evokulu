@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import {TextInput, View, StyleSheet, Alert, KeyboardAvoidingView} from 'react-native';
+import {TextInput, View, StyleSheet, Alert, KeyboardAvoidingView, Dimensions} from 'react-native';
 import {Formik} from "formik";
-import { Text, DismissKeyboardView, Button } from '~/components/my-base';
-import { Ellipse1, Ellipse2, Ellipse3 } from "~/assets/images/vectors";
+import { Text, DismissKeyboardView, TouchableBar } from '~/components/my-base';
 import {Spinner} from "native-base";
 import {inject, observer} from "mobx-react";
 import { NavigationEvents } from "react-navigation";
@@ -12,6 +11,7 @@ import validations from "./validations";
 import axios from "~/Api";
 import { getDeviceToken } from "~/Notifications";
 import NavigationService from "~/NavigationService";
+import {Bg, Logo2} from "~/assets/images/vectors";
 
 
 @inject('AuthStore')
@@ -70,13 +70,7 @@ export default class SignIn extends Component {
   render() {
     return (
       <DismissKeyboardView style={s.container}>
-
-
-
-        <Ellipse1 style={s.ellipse1} />
-        <Ellipse2 style={s.ellipse2} />
-        <Ellipse3 style={s.ellipse3} />
-
+        <Bg style={s.background}/>
 
         <Formik
           initialValues={{
@@ -99,11 +93,11 @@ export default class SignIn extends Component {
             <React.Fragment>
               <NavigationEvents onWillFocus={resetForm} />
               <KeyboardAvoidingView behavior={"position"}>
-                <Text style={s.title}>Giriş</Text>
+                <Logo2 style={s.logo}/>
                 <View>
-                  <Text style={s.label}>KULLANICI ADI</Text>
                   <TextInput
                     returnKeyType={'next'}
+                    placeholder="Kullanıcı Adı"
                     onSubmitEditing={() => this.passwordRef.focus()}
                     onChangeText={handleChange('username')}
                     value={values.username}
@@ -115,9 +109,9 @@ export default class SignIn extends Component {
                   { (errors.username && touched.username) && <Text style={s.error}> {errors.username} </Text> }
                 </View>
                 <View>
-                  <Text style={s.label}>ŞİFRE</Text>
                   <TextInput
                     ref={ref => this.passwordRef = ref}
+                    placeholder="Şifre"
                     onSubmitEditing={handleSubmit}
                     returnKeyType={'go'}
                     onChangeText={handleChange('password')}
@@ -130,28 +124,21 @@ export default class SignIn extends Component {
                   { (errors.password && touched.password) && <Text style={s.error}> {errors.password} </Text>}
                 </View>
               </KeyboardAvoidingView>
-
-              <View style={{flex: 1, flexDirection: 'row'}}>
-                <Button style={s.buttonC} onPress={handleSubmit}>
-                  {
-                    isSubmitting
-                      ? <Spinner size={'small'} color={'white'} style={{ height: res(20)}} />
-                      : <Text style={s.buttonText}>GİRİŞ YAP</Text>
-                  }
-                </Button>
-              </View>
+              <Text style={s.route} onPress={() => { NavigationService.navigate('SignUp'); }}>
+                Kayıt ol!
+              </Text>
+              <TouchableBar style={s.button} onPress={handleSubmit}>
+                {
+                  isSubmitting
+                    ? <Spinner size={'small'} color={'#DC6929'} style={{ height: res(20)}} />
+                    : <Text style={s.buttonText}>GİRİŞ YAP</Text>
+                }
+              </TouchableBar>
 
 
             </React.Fragment>
           )}
         </Formik>
-
-        <Text style={s.bottomText}>
-          Yeni Kayıt?&nbsp;
-          <Text style={s.route} onPress={() => { NavigationService.navigate('SignUp'); }}>
-            Hesap Oluştur
-          </Text>
-        </Text>
 
       </DismissKeyboardView>
     );
@@ -159,44 +146,31 @@ export default class SignIn extends Component {
 }
 
 const s = StyleSheet.create({
+  background: {
+    position: 'absolute',
+    width: Math.round((Dimensions.get('window').height+100) * 9/16),
+    height: Math.round(Dimensions.get('window').height+100),
+  },
   container: {
     flex: 1,
-    backgroundColor: '#f7f9fe',
     paddingHorizontal: res(20),
   },
-  ellipse1: {
-    position: 'absolute',
-    right: 0,
-    top: res(130),
-  },
-  ellipse2: {
-    position: 'absolute'
-  },
-  ellipse3: {
-    position: 'absolute',
-    right: res(80),
-    top: res(300)
-  },
-  title: {
-    marginTop: res(210),
-    marginBottom: res(60),
-    fontSize: res(30),
-    color: '#384F7D'
-  },
-  label: {
-    fontSize: res(12),
-    color: 'rgba(68, 89, 132, 0.3)',
-    marginBottom: res(5),
+  logo: {
+    marginTop: res(150),
+    marginBottom: res(30),
+    alignSelf: 'center',
+    width: res(100),
+    height: res(100)
   },
   input: {
-    height: res(50),
+    marginHorizontal: res(15),
+    height: res(40),
     padding: res(10),
     marginBottom: res(20),
     backgroundColor: 'white',
-    color: '#7e8dab',
-    width: '100%',
-    borderRadius: res(7),
-    shadowColor: 'rgba(71, 55, 255, 0.08)',
+    color: '#545757',
+    borderRadius: res(20),
+    shadowColor: 'rgba(0, 0, 0, 0.2)',
     shadowOpacity: 1,
     shadowRadius: res(7),
     shadowOffset: {
@@ -204,35 +178,32 @@ const s = StyleSheet.create({
       height: res(10)
     },
     elevation: 4,
-    fontFamily: 'ComicSansMS'
+    fontFamily: 'Helvetica'
   },
   error: {
     position: 'absolute',
-    right: res(5),
+    right: res(20),
+    top: res(10),
     fontSize: res(12),
-    color: '#ff5f69'
+    color: '#c3312a'
   },
-  buttonC: {
-    alignSelf: 'flex-end',
 
-  },
   button: {
-    borderRadius: res(7),
-    padding: res(15),
+    alignSelf: 'center',
+    width: res(120),
+    marginTop: res(50),
   },
   buttonText: {
     textAlign: 'center',
-    color: 'white',
+    color: '#DC6929',
     fontSize: res(15)
   },
-  bottomText: {
-    color: '#384F7D',
-    textAlign: 'center',
-    marginTop: res(20),
-    marginBottom: res(40)
-  },
   route: {
-    color: '#384F7D',
-    textDecorationLine: 'underline'
+    fontSize: res(14),
+    fontWeight: 'normal',
+    color: 'white',
+    fontFamily: 'Helvetica',
+    alignSelf: 'flex-end',
+    marginRight: res(25)
   }
 });

@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {StyleSheet, Image, View} from 'react-native';
+import {SvgUri} from 'react-native-svg';
 import {res, T} from '~/helpers';
 import {Text, Container, TouchableBox} from '~/components/my-base'
 import NavigationService from "~/NavigationService";
@@ -33,7 +34,11 @@ export default class Categories extends Component {
                         key={category.$id}
                       >
                         <View style={s.iconC}>
-                          <Question/>
+                          <SvgUri
+                            width="100%"
+                            height="100%"
+                            uri={category.PictureUrl}
+                          />
                         </View>
                         <Text style={s.boxText}> {category.CategoryName} </Text>
                       </TouchableBox>
@@ -66,14 +71,11 @@ const s = StyleSheet.create({
     paddingHorizontal: 0
   },
   boxText: {
-
     color: '#DC6929',
     textAlign: 'center',
     alignSelf: 'center',
     fontWeight: 'bold',
     fontSize: res(15),
-
-
   },
   iconC: {
     width: res(50),
@@ -88,6 +90,5 @@ const s = StyleSheet.create({
     resizeMode: 'cover',
     height: res(90),
     width: res(70),
-
   }
 });

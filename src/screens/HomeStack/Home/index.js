@@ -4,7 +4,10 @@ import {res, T} from '~/helpers';
 import {Text, Container, TouchableBox} from '~/components/my-base'
 import NavigationService from '~/NavigationService';
 import {Logo, Announce, Question} from '~/assets/images/vectors';
+import {inject, observer} from "mobx-react";
 
+@inject('AuthStore')
+@observer
 export default class Home extends Component {
 
   render() {
@@ -12,7 +15,7 @@ export default class Home extends Component {
       <Container>
 
         <Text style={s.welcome}>Hoş Geldin</Text>
-        <Text style={s.name}>Metehan Altaş</Text>
+        <Text style={s.name}>{this.props.AuthStore.user.UserName}</Text>
 
         <View style={s.triple}>
           <TouchableBox style={s.box}>

@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import LottieView from "lottie-react-native";
 import {res, T} from '~/helpers';
-import { Text, Container, Box} from '~/components/my-base';
+import { Text, Container, Box, TouchableBar} from '~/components/my-base';
 import axios from "~/Api";
 import LinearGradient from "react-native-linear-gradient";
 import NavigationService from "~/NavigationService";
@@ -56,12 +56,9 @@ export default class Question extends Component {
             <Text style={s.resultText}>Boş: {blankQ}</Text>
           </View>
         </Box>
-        <TouchableOpacity style={s.buttonC} onPress={() => { this.props.navigation.pop(2) }}>
-          <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 10}} style={s.button}
-                          colors={[ '#BAFB67', '#75ea6b']} locations={[0.01, 0.15]}>
-            <Text style={s.buttonText}>SINAVLARA DÖN</Text>
-          </LinearGradient>
-        </TouchableOpacity>
+        <TouchableBar style={s.buttonC} onPress={() => { this.props.navigation.pop(2) }}>
+          <Text style={s.buttonText}>SINAVLARA DÖN</Text>
+        </TouchableBar>
 
       </Container>
     );
@@ -120,7 +117,7 @@ const s = StyleSheet.create({
   },
   buttonText: {
     textAlign: 'center',
-    color: 'white',
+    color: '#DC6929',
     fontSize: res(15)
   },
 });

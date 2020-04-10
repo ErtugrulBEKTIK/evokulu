@@ -38,7 +38,7 @@ export default class Header extends Component {
         }
         <View style={s.titleC}>
           <View style={s.iconC}>
-            <PageIcon style={s.pageIcon}/>
+            <PageIcon />
           </View>
           <Text style={s.title}>{title}</Text>
         </View>
