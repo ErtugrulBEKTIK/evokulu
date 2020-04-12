@@ -37,8 +37,14 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Soru çekebilmek için kameranıza erişimine izin vermeniz gerekiyor</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string/>
+	<string></string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Galerinizden soru seçebilmek için izin verin</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Galerinizden soru seçebilmek için izin verin</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
@@ -91,11 +97,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-	<key>NSCameraUsageDescription</key>
-	<string>Soru çekebilmek için kameranıza erişimine izin vermeniz gerekiyor</string>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>Galerinizden soru seçebilmek için izin verin</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Galerinizden soru seçebilmek için izin verin</string>
 </dict>
 </plist>

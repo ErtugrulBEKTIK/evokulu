@@ -24,26 +24,27 @@ export default class Header extends Component {
     const PageIcon = icons[icon ? icon : 'home'];
     return (
       <View style={s.headerC}>
-        <View style={s.background} />
-
-        {
-          renderBackButton &&
-          <TouchableOpacity
-            onPress={() => { NavigationService.goBack()}}
-            style={s.returnButton}>
-            <Icon style={s.returnButtonIcon}
-                  name="arrow-round-back"
-            />
-          </TouchableOpacity>
-        }
-        <View style={s.titleC}>
-          <View style={s.iconC}>
-            <PageIcon />
+        <View style={s.background} >
+          {
+            renderBackButton &&
+            <TouchableOpacity
+              onPress={() => { NavigationService.goBack()}}
+              style={s.returnButton}>
+              <Icon style={s.returnButtonIcon}
+                    name="arrow-round-back"
+              />
+            </TouchableOpacity>
+          }
+          <View style={s.titleC}>
+            <View style={s.iconC}>
+              <PageIcon />
+            </View>
+            <Text style={s.title}>{title}</Text>
           </View>
-          <Text style={s.title}>{title}</Text>
+
+          <Logo style={s.logo} />
         </View>
 
-        <Logo style={s.logo} />
 
       </View>
     );

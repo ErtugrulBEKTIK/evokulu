@@ -3,6 +3,7 @@ package com.evokulu;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnativecommunity.rnpermissions.RNPermissionsPackage;
 import com.zmxv.RNSound.RNSoundPackage;
 import com.reactnativecommunity.imageeditor.ImageEditorPackage;
 import io.codebakery.imagerotate.ImageRotatePackage;
@@ -40,10 +41,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNSoundPackage(),
-            new ImageEditorPackage(),
-            new ImageRotatePackage(),
-            new CameraRollPackage(),
+          new RNSoundPackage(),
+          new ImageEditorPackage(),
+          new ImageRotatePackage(),
+          new CameraRollPackage(),
           new RNCameraPackage(),
           new RNPermissionsPackage(),
           new SvgPackage(),

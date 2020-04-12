@@ -65,7 +65,7 @@ class AuthStore{
       }
 
       axios.defaults.transformRequest = [...axios.defaults.transformRequest, (data) => {
-        let newData = {token, ...JSON.parse(data)};
+        let newData = { Tokenkey: token, ...JSON.parse(data) };
         return JSON.stringify(newData);
       }];
 

@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Modal, StatusBar, Image, View} from 'react-native';
-import {inject, observer} from "mobx-react";
+import {StyleSheet, View} from 'react-native';
 import {res, T} from '~/helpers';
 import {Text, Container, TouchableBar, Box} from '~/components/my-base'
 import {Camera, Question} from '~/assets/images/vectors';
@@ -31,7 +30,7 @@ export default class Switch extends Component {
 
 
           <TouchableBar style={s.button} onPress={() => {
-
+            NavigationService.navigate('MyQuestions');
           }}>
             <View style={[s.shapeC, { backgroundColor: '#DC6929' }]}>
               <Question/>

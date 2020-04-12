@@ -65,9 +65,6 @@ const App = createBottomTabNavigator({
     showIcon: true,
     showLabel: false,
     inactiveTintColor: '#E8DAD1',
-    labelStyle: {
-      fontFamily: 'ComicSansMS'
-    },
     style: {
       paddingVertical: res(5),
       height: res(50),

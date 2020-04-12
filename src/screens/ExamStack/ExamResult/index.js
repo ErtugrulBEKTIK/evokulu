@@ -42,7 +42,7 @@ export default class Question extends Component {
     return (
       <Container loading={loading}>
         <Box style={s.box}>
-          <LottieView style={s.spinner} source={require('~/assets/animations/trophy.json')} autoPlay loop={false} />
+          <LottieView source={require('~/assets/animations/trophy.json')} autoPlay loop={false} />
         </Box>
         <Box style={s.box}>
           <View style={s.chartC}>

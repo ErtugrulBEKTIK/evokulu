@@ -72,7 +72,6 @@ export default class Camera extends Component {
   };
 
   render() {
-    console.log(this.props);
     const flashIcons = ['flash-off', 'flash-on', 'flash-auto'];
     const { flashMode, cameraType } = this.state;
     return (

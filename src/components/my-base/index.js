@@ -6,7 +6,7 @@ import _TouchableBox from './TouchableBox';
 import _TouchableBar from './TouchableBar';
 import _DismissKeyboardView from './DismissKeyboardView';
 import _Spinner from './Spinner';
-import _SettingsItemfrom from './SettingsItem';
+import _SettingsItem from './SettingsItem';
 
 export const Container = _Container;
 export const Box = _Box;
@@ -16,4 +16,4 @@ export const Text = _Text;
 export const Button = _Button;
 export const DismissKeyboardView = _DismissKeyboardView;
 export const Spinner = _Spinner;
-export const SettingsItem = _SettingsItemfrom;
+export const SettingsItem = _SettingsItem;

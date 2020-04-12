@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {StyleSheet, View} from 'react-native';
 import {res, T} from '~/helpers';
-import {Text, Container, TouchableBox} from '~/components/my-base'
+import {Text, Container, TouchableBox, TouchableBar} from '~/components/my-base'
 import NavigationService from '~/NavigationService';
-import {Logo, Announce, Question} from '~/assets/images/vectors';
+import {Ask, Announce, Competition, Lesson, Online, Results} from './vectors';
 import {inject, observer} from "mobx-react";
 
 @inject('AuthStore')
@@ -18,17 +18,43 @@ export default class Home extends Component {
         <Text style={s.name}>{this.props.AuthStore.user.UserName}</Text>
 
         <View style={s.triple}>
-          <TouchableBox style={s.box}>
-            <View style={s.iconC}>
-              <Question/>
-            </View>
-            <Text style={s.boxText}> Dersler </Text>
+          <TouchableBox style={s.box} onPress={() => {
+            NavigationService.navigate('Exam');
+          }}>
+            <View style={s.iconC}><Competition/></View>
+            <Text style={s.boxText}> Yarış </Text>
           </TouchableBox>
-          <TouchableBox style={s.box}>
-            <Text style={s.boxText}> Dersler </Text>
+          <TouchableBox style={s.box} onPress={() => {
+            NavigationService.navigate('Question');
+          }}>
+            <View style={s.iconC}><Ask/></View>
+            <Text style={s.boxText}> Bize sor </Text>
           </TouchableBox>
-          <TouchableBox style={[s.box, {marginRight: 0}]}>
-            <Text style={s.boxText}> Dersler </Text>
+          <TouchableBox style={[s.box, {marginRight: 0}]} onPress={() => {
+            NavigationService.navigate('Announce');
+          }}>
+            <View style={s.iconC}><Announce/></View>
+            <Text style={s.boxText}> Duyurular </Text>
+          </TouchableBox>
+        </View>
+        <View style={s.triple}>
+          <TouchableBox style={s.box} onPress={() => {
+            alert('Çok yakında!')
+          }}>
+            <View style={s.iconC}><Online/></View>
+            <Text style={s.boxText}> Online Sınıf </Text>
+          </TouchableBox>
+          <TouchableBox style={s.box} onPress={() => {
+            alert('Çok yakında!')
+          }}>
+            <View style={s.iconC}><Lesson/></View>
+            <Text style={s.boxText}> Ders Anlatımı </Text>
+          </TouchableBox>
+          <TouchableBox style={[s.box, {marginRight: 0}]} onPress={() => {
+            alert('Çok yakında!')
+          }}>
+            <View style={s.iconC}><Results/></View>
+            <Text style={s.boxText}> Sonuçlarım </Text>
           </TouchableBox>
         </View>
 
@@ -48,13 +74,15 @@ const s = StyleSheet.create({
     alignItems: 'center',
     marginRight: res(15),
     marginBottom: res(15),
+    paddingHorizontal: res(5)
   },
   boxText: {
     color: '#DC6929',
     textAlign: 'center',
     fontWeight: 'bold',
-    fontSize: res(17),
+    fontSize: res(13),
     height: res(20),
+    marginTop: res(5),
   },
   iconC: {
     width: res(50),
