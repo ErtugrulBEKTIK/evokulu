@@ -6,6 +6,7 @@ import {res} from '~/helpers';
 import {Text, Container, TouchableBox} from '~/components/my-base'
 import NavigationService from '~/NavigationService';
 import axios from "~/Api";
+import Solved from "./solved.svg";
 import {inject, observer} from "mobx-react";
 
 @inject('AuthStore')
@@ -36,16 +37,25 @@ export default class MyQuestions extends Component {
       <Container loading={loading} scroll>
 
         { questions.map((question) => {
-          const {$id, QuestionDesc, QuestionFileUrl, QuestionCreateDate} = question;
+          const {$id, IsStatus, QuestionFileUrl, QuestionCreateDate} = question;
 
           const date = moment(QuestionCreateDate, 'D.M.YYYY HH:mm:ss');
           return (
             <TouchableBox style={s.box} key={$id}
-              onPress={() => { NavigationService.navigate('Detail', { announce }) }}
+              onPress={() => { NavigationService.navigate('Detail', { question }) }}
             >
-              <Image style={s.image} source={{uri: QuestionFileUrl}} />
+              <View style={s.imageC}>
+                <Image style={s.image} source={{uri: QuestionFileUrl}} />
+                {
+                  IsStatus
+                    ? <Solved style={s.solved}/>
+                    : null
+                }
+
+              </View>
+
               <View style={s.info}>
-                <Text style={s.title}>{QuestionDesc}</Text>
+                <Text style={s.title}>2. Sınıf / Matematik</Text>
                 <Text style={s.title}>{date.format('D.M.YYYY')}</Text>
               </View>
             </TouchableBox>
@@ -55,26 +65,37 @@ export default class MyQuestions extends Component {
     );
   }
 }
-
+// TODO: 58. satırda sınıf ve dersi dinamik yap
 
 const s = StyleSheet.create({
   box: {
+    padding: 0,
     marginBottom: res(15),
     marginHorizontal: res(15),
+    overflow: 'hidden'
+  },
+  imageC: {
+    height: res(170),
   },
 
   image: {
-    resizeMode: 'contain',
-    height: res(200),
+    height: '100%',
     width: '100%'
+  },
+  solved: {
+    position: 'absolute',
+    width: res(80),
+    height: res(80),
+    right: 0,
+    top: 0,
   },
 
   info: {
     borderColor: '#d4d7d7',
     borderTopWidth: res(1),
     flexDirection: 'row',
-    height: res(20),
-    marginTop: res(10),
+    paddingHorizontal: res(10),
+    paddingBottom: res(5),
     alignItems: 'center',
     justifyContent: 'space-between'
   },
@@ -82,7 +103,7 @@ const s = StyleSheet.create({
     fontWeight:'normal',
     fontFamily: 'Helvetica',
     color: '#545757',
-    fontSize: res(16),
+    fontSize: res(13),
   },
 
 });

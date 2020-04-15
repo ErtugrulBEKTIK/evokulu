@@ -20,6 +20,7 @@ export default class Container extends Component {
             ? <Spinner/>
             : <ScrollView style={containerStyle} ref={ scrolViewRef ? (ref) => { scrolViewRef(ref) } : null } scrollEnabled={!!this.props.scroll}>
                 { this.props.children }
+                <View style={s.placeholder}/>
               </ScrollView>
         }
       </SafeAreaView>
@@ -36,5 +37,8 @@ const s = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: res(30),
+  },
+  placeholder: {
+    height: res(50)
   }
 });

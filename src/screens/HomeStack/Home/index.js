@@ -22,7 +22,7 @@ export default class Home extends Component {
             NavigationService.navigate('Exam');
           }}>
             <View style={s.iconC}><Competition/></View>
-            <Text style={s.boxText}> Yarış </Text>
+            <Text style={s.boxText}> Test Çöz </Text>
           </TouchableBox>
           <TouchableBox style={s.box} onPress={() => {
             NavigationService.navigate('Question');

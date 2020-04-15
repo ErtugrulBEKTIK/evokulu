@@ -24,7 +24,7 @@ export default class Announce extends Component {
         <Box style={s.box}>
           <ScrollView>
             <Text style={s.title}>{title}</Text>
-            <Text style={s.text}>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium delectus deleniti, exercitationem iste quam quisquam recusandae vero. Cupiditate deleniti nemo numquam obcaecati quam qui? Accusantium autem beatae eum id inventore natus reiciendis! Dignissimos, enim eos est excepturi, ipsa itaque laborum, natus nemo neque quas quasi sit tempore unde ut voluptas.</Text>
+            <Text style={s.text}>{text}</Text>
             <Text style={s.date}>{moment(ReleaseDate, 'D.M.YYYY HH:mm:ss').format('D.M.YYYY')}</Text>
           </ScrollView>
         </Box>

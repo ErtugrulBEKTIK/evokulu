@@ -37,7 +37,6 @@ export default class Classes extends Component {
           </TouchableBar>
         )) }
 
-        <View style={{marginBottom: res(50)}}/>
       </Container>
     );
   }

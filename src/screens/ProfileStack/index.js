@@ -10,7 +10,7 @@ const ProfileStack = createStackNavigator({
   Profile: {
     screen: Profile,
     navigationOptions: {
-      header: <Header title="Profil" renderBackButton={false} hideSearch />
+      header: <Header title="Profil" renderBackButton={false} icon="user" />
     }
   },
 

@@ -198,11 +198,11 @@ const s = StyleSheet.create({
     color: 'white'
   },
   logo: {
-    marginTop: res(100),
-    marginBottom: res(30),
+    marginTop: res(70),
+    marginBottom: res(20),
     alignSelf: 'center',
-    width: res(100),
-    height: res(100)
+    width: res(150),
+    height: res(150)
   },
   box: {
     backgroundColor: '#E8DAD1',

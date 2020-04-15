@@ -49,7 +49,7 @@ const s = StyleSheet.create({
   box: {
     minHeight: res(150),
     padding: res(30),
-    marginHorizontal: res(40),
+    marginHorizontal: res(30),
     marginVertical: res(20),
     borderRadius: res(40)
   },

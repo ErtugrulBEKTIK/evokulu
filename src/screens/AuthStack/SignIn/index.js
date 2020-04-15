@@ -156,11 +156,11 @@ const s = StyleSheet.create({
     paddingHorizontal: res(20),
   },
   logo: {
-    marginTop: res(150),
-    marginBottom: res(30),
+    marginTop: res(120),
+    marginBottom: res(20),
     alignSelf: 'center',
-    width: res(100),
-    height: res(100)
+    width: res(150),
+    height: res(150)
   },
   input: {
     marginHorizontal: res(15),

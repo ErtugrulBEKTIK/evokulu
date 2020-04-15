@@ -27,8 +27,7 @@ export default class Question extends Component {
     result: {
       totalQ: 0,
       trueQ: 0,
-      falseQ: 0,
-      blankQ: 0
+      falseQ: 0
     }
   };
 

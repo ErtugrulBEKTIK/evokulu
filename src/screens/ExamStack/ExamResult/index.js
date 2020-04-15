@@ -15,45 +15,116 @@ export default class Question extends Component {
   }
 
   state = {
-    loading: false
+    loading: false,
+    phrase: ""
   };
 
   componentDidMount() {
-    this.sendExamResult()
+    this.sendExamResult();
+    this.calculateRate();
   }
 
+  calculateRate = () => {
+    const { trueQ, totalQ } = this.result;
+
+    const rate = ( trueQ / totalQ ) * 100;
+
+    let starCount, phrase;
+
+    if(rate === 0){
+      starCount = 0;
+      phrase = "KONUYA BAŞTAN ÇALIŞMALISIN";
+
+    }else if(rate > 0 && rate <= 30){
+      starCount = 1;
+      phrase = "BİRAZ DAHA ÇALIŞMALISIN";
+
+    }else if(rate > 30 && rate <= 60){
+      starCount = 2;
+      phrase = "OLDUKÇA İYİSİN";
+    }else{
+      starCount = 3;
+      phrase = "HARİKASIN!!";
+    }
+
+    setTimeout(() => {
+      this.setState({ phrase });
+    },500);
+
+
+    this.playAnimation(starCount)
+
+  };
+
+  playAnimation = (starCount) => {
+    if(starCount === 1 || starCount === 2 || starCount === 3){
+      this.star1.play(20, 80);
+    }
+
+    if(starCount === 2 || starCount === 3){
+      setTimeout(() => {
+        this.star2.play();
+      },500);
+    }
+
+    if(starCount === 3){
+      setTimeout(() => {
+        this.star3.play();
+      },1500);
+    }
+
+  };
+
   sendExamResult = async () => {
-    const { trueQ, falseQ, blankQ } = this.result;
+    const { trueQ, falseQ } = this.result;
 
     const { data } = await axios.post('UserResult/InsertUserResult', {
       ExamId: this.props.navigation.getParam('exam').ExamId,
       UserId: 4,
       CorrectCount: trueQ,
       WrongCount: falseQ,
-      NullCount: blankQ
+      NullCount: 0
     });
 
   };
 
   render() {
-    const { loading } = this.state;
-    const { trueQ, falseQ, blankQ, totalQ } = this.result;
+    const { loading, phrase } = this.state;
+    const { trueQ, falseQ, totalQ } = this.result;
 
     return (
       <Container loading={loading}>
-        <Box style={s.box}>
-          <LottieView source={require('~/assets/animations/trophy.json')} autoPlay loop={false} />
+        <Box style={[s.box, s.starBox]}>
+          <View style={s.starC}>
+            <LottieView
+              ref={star => {
+                this.star1 = star;
+              }}
+              style={s.star}
+              source={require('~/assets/animations/star.json')} loop={false} />
+            <LottieView
+              ref={star => {
+                this.star2 = star;
+              }}
+              style={s.star}
+              source={require('~/assets/animations/star.json')} loop={false} />
+            <LottieView
+              ref={star => {
+                this.star3 = star;
+              }}
+              style={s.star}
+              source={require('~/assets/animations/star.json')} loop={false} />
+          </View>
+          <Text style={s.starText}>{phrase}</Text>
         </Box>
         <Box style={s.box}>
           <View style={s.chartC}>
             <View style={[s.chartBar, {height: (trueQ/totalQ*100)+'%', backgroundColor: '#BAFB67'}]}/>
             <View style={[s.chartBar, {height: (falseQ/totalQ*100)+'%', backgroundColor: '#D85D5D'}]}/>
-            <View style={[s.chartBar, {height: (blankQ/totalQ*100)+'%', backgroundColor: '#A298FD'}]}/>
           </View>
           <View style={s.resultC}>
             <Text style={s.resultText}>Doğru: {trueQ}</Text>
             <Text style={s.resultText}>Yanlış: {falseQ}</Text>
-            <Text style={s.resultText}>Boş: {blankQ}</Text>
           </View>
         </Box>
         <TouchableBar style={s.buttonC} onPress={() => { this.props.navigation.pop(2) }}>
@@ -72,11 +143,21 @@ const s = StyleSheet.create({
     padding: res(20),
     marginBottom: res(20)
   },
-  questionText: {
+  starBox: {
+    paddingVertical: res(0),
+  },
+  starC: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+  },
+  star: {
+    width: res(130)
+  },
+  starText: {
+    marginTop: -res(20),
     textAlign: 'center',
-    fontSize: res(16),
-    color: '#564ea7',
-    fontWeight: 'bold'
+    color: '#c3312a'
   },
   chartC: {
     flex: 1,
@@ -91,7 +172,7 @@ const s = StyleSheet.create({
     justifyContent: 'space-around'
   },
   resultText: {
-    color: '#384F7D',
+    color: '#545757',
     textAlign: 'center'
   },
   chartBar: {
@@ -102,7 +183,7 @@ const s = StyleSheet.create({
   buttonC: {
     alignSelf: 'flex-end',
     width: '100%',
-    shadowColor: 'rgba(71, 55, 255, 0.1)',
+    shadowColor: 'rgba(0, 0, 0, 0.2)',
     shadowOpacity: 1,
     shadowRadius: res(7),
     shadowOffset: {

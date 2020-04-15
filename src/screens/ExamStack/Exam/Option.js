@@ -24,7 +24,7 @@ export default class Option extends Component {
         <View style={[s.shapeC, { backgroundColor: answerState === 'unanswered' ? '#DC6929' : 'rgba(255,255,255,0.5)' }]}>
           <Text style={s.letter}>{letters[no-1]}</Text>
         </View>
-        <Text style={[s.text, {color: answerState === 'unanswered' ? '#545757' : 'white' }]}>
+        <Text style={{color: answerState === 'unanswered' ? '#545757' : 'white' }}>
           { text }
         </Text>
 
@@ -42,7 +42,7 @@ const s = StyleSheet.create({
     height: res(42),
     borderRadius: res(21),
     marginBottom: res(5),
-    shadowColor: 'rgba(71, 55, 255, 0.1)',
+    shadowColor: 'rgba(0, 0, 0, 0.2)',
     shadowOpacity: 1,
     shadowRadius: res(7),
     shadowOffset: {
@@ -66,9 +66,5 @@ const s = StyleSheet.create({
   letter: {
     marginTop: -res(2),
     color: 'white'
-  },
-  text: {
-
-    color: '#384F7D'
   }
 });

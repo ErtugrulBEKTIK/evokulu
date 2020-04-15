@@ -3,7 +3,6 @@ package com.evokulu;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.reactnativecommunity.rnpermissions.RNPermissionsPackage;
 import com.zmxv.RNSound.RNSoundPackage;
 import com.reactnativecommunity.imageeditor.ImageEditorPackage;
 import io.codebakery.imagerotate.ImageRotatePackage;

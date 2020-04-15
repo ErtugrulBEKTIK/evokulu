@@ -31,6 +31,7 @@ export default class Header extends Component {
               onPress={() => { NavigationService.goBack()}}
               style={s.returnButton}>
               <Icon style={s.returnButtonIcon}
+                    type="Ionicons"
                     name="arrow-round-back"
               />
             </TouchableOpacity>
@@ -108,8 +109,8 @@ const s = StyleSheet.create({
   logo: {
     position: 'absolute',
     alignSelf: 'center',
-    top: res(50),
-    width: res(70),
-    height: res(70)
+    top: res(30),
+    width: res(100),
+    height: res(100)
   }
 });

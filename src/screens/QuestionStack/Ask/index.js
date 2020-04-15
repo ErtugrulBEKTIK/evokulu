@@ -82,45 +82,55 @@ export default class Ask extends Component {
   handleSubmit = async () => {
     try {
 
-      this.setState({isSubmitting: true});
       const { selectedClass, selectedLesson, question } = this.state;
 
-      const data = {
-        apikey: API_KEY,
-        Tokenkey: this.props.AuthStore.token,
-        UserId: this.props.AuthStore.user.UserId,
-        Question: question,
-        ClassId: selectedClass,
-        CategoryId: selectedLesson,
-      };
+      if(selectedClass && selectedLesson && this.props.GalleryStore.lastImageUri){
+        this.setState({isSubmitting: true});
 
-      const image = {
-        paramName: 'FileUrl',
-        type: 'image/jpg',
-        newName: 'questionImage.jpg',
-        uri: this.props.GalleryStore.lastImageUri
-      };
-      console.log(this.props.GalleryStore.lastImageUri);
-      const formData = createFormData(data, image);
 
-      const response = await defaultAxios.post(API_BASE+'AskQuestion/InsertAskQuestion', formData, {
-        headers: {
-          'accept': 'application/json',
-          'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
+        const data = {
+          apikey: API_KEY,
+          Tokenkey: this.props.AuthStore.token,
+          UserId: this.props.AuthStore.user.UserId,
+          Question: question,
+          ClassId: selectedClass,
+          CategoryId: selectedLesson,
+        };
+
+        const image = {
+          paramName: 'FileUrl',
+          type: 'image/jpg',
+          newName: 'questionImage.jpg',
+          uri: this.props.GalleryStore.lastImageUri
+        };
+
+        const formData = createFormData(data, image);
+
+        const response = await defaultAxios.post(API_BASE+'AskQuestion/InsertAskQuestion', formData, {
+          headers: {
+            'accept': 'application/json',
+            'Content-Type': `multipart/form-data; boundary=${formData._boundary}`,
+          }
+        });
+        this.setState({isSubmitting: false});
+
+        if (!response.data) {
+
+          Alert.alert(
+            'Hata',
+            'Bir sorun meydana geldi.'
+          );
+          return false;
         }
-      });
-      this.setState({isSubmitting: false});
 
-      if (!response.data) {
-
+        this.setState({ resultModal: true });
+      }else{
         Alert.alert(
-          'Hata',
-          'Giriş bilgileri hatalı.'
+          'Uyarı!',
+          'Lütfen gerekli alanları doldurun.'
         );
-        return false;
       }
 
-      this.setState({ resultModal: true });
 
     }catch (e) {
       this.setState({isSubmitting: false});
@@ -192,27 +202,32 @@ export default class Ask extends Component {
           </View>
 
           <View style={s.pickerC}>
-            <RNPickerSelect
-              value={selectedClass}
-              disabled={classLoading}
-              doneText="Kapat"
-              useNativeAndroidPickerStyle={false}
-              placeholder={{label: classLoading ? 'Yükleniyor...' : 'Sınıf seçiniz...'}}
-              textInputProps={{style: s.input}}
-              onValueChange={(value) => { this.select(value, 'Class') }}
-              items={classes}
-            />
+            <View style={{flex: 1, paddingRight: res(3)}}>
+              <RNPickerSelect
+                value={selectedClass}
+                disabled={classLoading}
+                doneText="Kapat"
+                useNativeAndroidPickerStyle={false}
+                placeholder={{label: classLoading ? 'Yükleniyor...' : 'Sınıf seçiniz...'}}
+                textInputProps={{style: s.input}}
+                onValueChange={(value) => { this.select(value, 'Class') }}
+                items={classes}
+              />
+            </View>
 
-            <RNPickerSelect
-              value={selectedLesson}
-              disabled={!selectedClass}
-              doneText="Kapat"
-              useNativeAndroidPickerStyle={false}
-              placeholder={{label: 'Ders seçiniz...'}}
-              textInputProps={{style: s.input}}
-              onValueChange={(value) => { this.select(value, 'Lesson') }}
-              items={selectedClass ? lessons[selectedClass] : []}
-            />
+            <View style={{flex: 1, paddingLeft: res(3)}}>
+              <RNPickerSelect
+                value={selectedLesson}
+                disabled={!selectedClass}
+                doneText="Kapat"
+                useNativeAndroidPickerStyle={false}
+                placeholder={{label: 'Ders seçiniz...'}}
+                textInputProps={{style: s.input}}
+                onValueChange={(value) => { this.select(value, 'Lesson') }}
+                items={selectedClass ? lessons[selectedClass] : []}
+              />
+            </View>
+
 
           </View>
 
@@ -274,7 +289,7 @@ const s = StyleSheet.create({
     color: '#545757',
     backgroundColor: '#C1AC9A',
     height: res(40),
-    width: res(120),
+    width: '100%',
     borderRadius: res(20)
   },
   description: {
