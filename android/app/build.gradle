@@ -102,7 +102,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.evokulu"
+        applicationId "org.tugva.uzaktansinif"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -154,10 +154,12 @@ android {
 }
 
 dependencies {
+    implementation project(':react-native-permissions')
+    implementation project(':react-native-image-resizer')
+    implementation project(':@react-native-community_cameraroll')
     implementation project(':react-native-sound')
     implementation project(':@react-native-community_image-editor')
     implementation project(':react-native-image-rotate')
-    implementation project(':@react-native-community_cameraroll')
     implementation project(':react-native-camera')
     implementation project(':react-native-svg')
     implementation project(':lottie-react-native')

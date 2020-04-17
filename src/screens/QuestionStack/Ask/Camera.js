@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
-import {StyleSheet, Modal, Platform, StatusBar, SafeAreaView, View, TouchableOpacity, CameraRoll, PermissionsAndroid } from 'react-native';
+import {StyleSheet, Modal, Platform, StatusBar, SafeAreaView, View, TouchableOpacity } from 'react-native';
 import {RNCamera} from 'react-native-camera';
 import {inject, observer} from "mobx-react";
-import {request, PERMISSIONS} from 'react-native-permissions';
-import {res, T} from '~/helpers';
+import {res, T, checkPermission} from '~/helpers';
 import {Icon} from 'native-base'
 import NavigationService from '~/NavigationService';
 
@@ -16,22 +15,6 @@ export default class Camera extends Component {
   state = {
     flashMode: 2,
     cameraType: 'back',
-  };
-
-  requestWriteExternalStoragePermission = async () => {
-    try {
-      const granted = await PermissionsAndroid.request(
-        PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-      );
-
-      if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-        console.log('You can use the camera');
-      } else {
-        console.log('Camera permission denied');
-      }
-    } catch (err) {
-      console.warn(err);
-    }
   };
 
   setFlashMode = () => {
@@ -56,7 +39,7 @@ export default class Camera extends Component {
     };
 
     if (Platform.OS === 'android' && Platform.Version > 22) {
-      await this.requestWriteExternalStoragePermission();
+      checkPermission('photo');
     }
 
     const data = await this.camera.takePictureAsync(options);
@@ -95,8 +78,14 @@ export default class Camera extends Component {
           </View>
           <View style={s.bottomController}>
             <TouchableOpacity onPress={() => {
-              this.props.GalleryStore.setModal('gallery', true);
-              this.props.GalleryStore.setModal('camera', false);
+              checkPermission('gallery').then((permission) => {
+                console.log('xxx', permission);
+                if(permission === 'granted'){
+                  this.props.GalleryStore.setModal('gallery', true);
+                  this.props.GalleryStore.setModal('camera', false);
+                }
+              });
+
             }}>
               <Icon type="MaterialIcons" style={s.icon} name="collections"/>
             </TouchableOpacity>

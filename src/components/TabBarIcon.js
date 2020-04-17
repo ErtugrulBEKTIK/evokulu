@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {View} from "react-native";
 import { StyleSheet } from 'react-native';
 import { res } from '~/helpers';
-import {Announce, Compass, Home, Question, User} from "~/assets/images/vectors";
+import {Announce, Compass, Document, Home, Question, User} from "~/assets/images/vectors";
 
 
 
@@ -17,6 +17,7 @@ export default class TabBarIcon extends Component {
       compass: Compass,
       question: Question,
       user: User,
+      document: Document,
     };
     const Icon = icons[icon ? icon : 'home'];
 

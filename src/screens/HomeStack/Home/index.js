@@ -51,7 +51,7 @@ export default class Home extends Component {
             <Text style={s.boxText}> Ders Anlatımı </Text>
           </TouchableBox>
           <TouchableBox style={[s.box, {marginRight: 0}]} onPress={() => {
-            alert('Çok yakında!')
+            NavigationService.navigate('Results');
           }}>
             <View style={s.iconC}><Results/></View>
             <Text style={s.boxText}> Sonuçlarım </Text>

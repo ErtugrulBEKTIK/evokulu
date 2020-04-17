@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "851073004011",
-    "firebase_url": "https://ev-okulu.firebaseio.com",
-    "project_id": "ev-okulu",
-    "storage_bucket": "ev-okulu.appspot.com"
+    "project_number": "1077399416541",
+    "firebase_url": "https://uzaktan-sinif.firebaseio.com",
+    "project_id": "uzaktan-sinif",
+    "storage_bucket": "uzaktan-sinif.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:851073004011:android:221113196959016850a9ae",
+        "mobilesdk_app_id": "1:1077399416541:android:192c8b6dbe7bffd1a33534",
         "android_client_info": {
-          "package_name": "com.evokulu"
+          "package_name": "org.tugva.uzaktansinif"
         }
       },
       "oauth_client": [
         {
-          "client_id": "851073004011-5bhpclk6j1o1vg02du1vr5kkdc97p1nm.apps.googleusercontent.com",
+          "client_id": "1077399416541-f1q33otk8fofpb19qetooolgivi497d0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDsuxP8bupEoYv69Kb3fjQs1EstEEah4iE"
+          "current_key": "AIzaSyCfB3EPk0erxnerS0bdMJFyTt5WZH6RcI0"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "851073004011-5bhpclk6j1o1vg02du1vr5kkdc97p1nm.apps.googleusercontent.com",
+              "client_id": "1077399416541-f1q33otk8fofpb19qetooolgivi497d0.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "851073004011-ecm9o1vd9lv0jfq2it46tkbr6r6qjuvi.apps.googleusercontent.com",
+              "client_id": "1077399416541-v1hhqfj5lh00nlkvi9fbkf255u5o0a97.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "org.tugva.evokuluapp"
+                "bundle_id": "org.tugva.uzaktansinif"
               }
             }
           ]

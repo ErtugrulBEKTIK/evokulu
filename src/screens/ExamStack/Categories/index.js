@@ -20,7 +20,7 @@ export default class Categories extends Component {
       <Container scroll>
         {
           T.range(1, Math.ceil(list.length / noInRow)).map((i) => (
-            <View style={s.triple} key={i.toString()}>
+            <View style={s.triple} key={i.toString()+'t'}>
               {
                 T.range(0, noInRow-1).map((k) => {
                   const index = (i-1)*noInRow +k;
@@ -44,7 +44,7 @@ export default class Categories extends Component {
                       </TouchableBox>
                     )
                   }else {
-                    return <View key={index.toString()} style={{flex: 1}} />
+                    return <View key={index.toString()} style={{flex: 1, paddingHorizontal: res(5), marginRight: k === noInRow-1 ? 0 : res(20)}} />
                   }
 
                 })

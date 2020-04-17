@@ -37,7 +37,7 @@ export default class MyQuestions extends Component {
       <Container loading={loading} scroll>
 
         { questions.map((question) => {
-          const {$id, IsStatus, QuestionFileUrl, QuestionCreateDate} = question;
+          const {$id, IsStatus, QuestionFileUrl, QuestionCreateDate, ClassName, CategoryName} = question;
 
           const date = moment(QuestionCreateDate, 'D.M.YYYY HH:mm:ss');
           return (
@@ -55,7 +55,7 @@ export default class MyQuestions extends Component {
               </View>
 
               <View style={s.info}>
-                <Text style={s.title}>2. Sınıf / Matematik</Text>
+                <Text style={s.title}>{ClassName} / {CategoryName}</Text>
                 <Text style={s.title}>{date.format('D.M.YYYY')}</Text>
               </View>
             </TouchableBox>
@@ -65,7 +65,6 @@ export default class MyQuestions extends Component {
     );
   }
 }
-// TODO: 58. satırda sınıf ve dersi dinamik yap
 
 const s = StyleSheet.create({
   box: {

@@ -19,6 +19,7 @@ import HomeStack from './screens/HomeStack';
 import ExamStack from './screens/ExamStack';
 import QuestionStack from './screens/QuestionStack';
 import AnnounceStack from './screens/AnnounceStack';
+import ResultStack from './screens/ResultStack';
 
 
 
@@ -44,18 +45,18 @@ const App = createBottomTabNavigator({
       tabBarIcon: ({ tintColor }) => <TabBarIcon icon="question" tintColor={tintColor} />
     }
   },
+  ResultStack: {
+    screen: ResultStack,
+    navigationOptions: {
+      title: 'Sonuçlar',
+      tabBarIcon: ({ tintColor }) => <TabBarIcon icon="document" tintColor={tintColor} />
+    }
+  },
   Announce: {
     screen: AnnounceStack,
     navigationOptions: {
       title: 'Tavsiyeler',
       tabBarIcon: ({ tintColor }) => <TabBarIcon icon="announce" tintColor={tintColor} />
-    }
-  },
-  Profile: {
-    screen: ProfileStack,
-    navigationOptions: {
-      title: 'Profil',
-      tabBarIcon: ({ tintColor }) => <TabBarIcon icon="user" tintColor={tintColor} />
     }
   }
 }, {

@@ -5,8 +5,8 @@ import {Text, Container, TouchableBar, Box} from '~/components/my-base'
 import {Camera, Question} from '~/assets/images/vectors';
 import NavigationService from "~/NavigationService";
 
-export default class Switch extends Component {
 
+export default class Switch extends Component {
 
   render() {
 

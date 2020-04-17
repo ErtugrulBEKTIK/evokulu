@@ -3,21 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>851073004011-ecm9o1vd9lv0jfq2it46tkbr6r6qjuvi.apps.googleusercontent.com</string>
+	<string>1077399416541-v1hhqfj5lh00nlkvi9fbkf255u5o0a97.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.851073004011-ecm9o1vd9lv0jfq2it46tkbr6r6qjuvi</string>
+	<string>com.googleusercontent.apps.1077399416541-v1hhqfj5lh00nlkvi9fbkf255u5o0a97</string>
 	<key>API_KEY</key>
-	<string>AIzaSyD7ZJWWSAhOIOS1m-wX-Zk7kqfLLEpi5FA</string>
+	<string>AIzaSyC2cNiSCC8RbTbFLA4AJ4vlB6wndHolVAA</string>
 	<key>GCM_SENDER_ID</key>
-	<string>851073004011</string>
+	<string>1077399416541</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.tugva.evokuluapp</string>
+	<string>org.tugva.uzaktansinif</string>
 	<key>PROJECT_ID</key>
-	<string>ev-okulu</string>
+	<string>uzaktan-sinif</string>
 	<key>STORAGE_BUCKET</key>
-	<string>ev-okulu.appspot.com</string>
+	<string>uzaktan-sinif.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -29,8 +29,8 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:851073004011:ios:feda2782cd2f704650a9ae</string>
+	<string>1:1077399416541:ios:d6ea7eb5e9fcac4ca33534</string>
 	<key>DATABASE_URL</key>
-	<string>https://ev-okulu.firebaseio.com</string>
+	<string>https://uzaktan-sinif.firebaseio.com</string>
 </dict>
 </plist>

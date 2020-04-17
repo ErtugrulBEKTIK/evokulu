@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import {View} from "react-native";
-import { StyleSheet, TouchableOpacity, Platform } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 import { res } from '~/helpers';
 import { Text } from '~/components/my-base'
+import Logout from '~/components/Logout'
 import {Icon} from "native-base";
 import NavigationService from "~/NavigationService";
-import {Logo, Announce, Home, Compass, Question, User} from '~/assets/images/vectors';
+import {Logo, Announce, Home, Compass, Question, User, Document} from '~/assets/images/vectors';
 
 
 
@@ -20,6 +21,7 @@ export default class Header extends Component {
       compass: Compass,
       question: Question,
       user: User,
+      document: Document,
     };
     const PageIcon = icons[icon ? icon : 'home'];
     return (
@@ -44,6 +46,8 @@ export default class Header extends Component {
           </View>
 
           <Logo style={s.logo} />
+
+          <Logout style={s.logout} />
         </View>
 
 
@@ -112,5 +116,11 @@ const s = StyleSheet.create({
     top: res(30),
     width: res(100),
     height: res(100)
+  },
+  logout: {
+    position: 'absolute',
+    top: res(50),
+    right: res(10),
+
   }
 });

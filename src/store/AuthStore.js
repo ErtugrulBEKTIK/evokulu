@@ -26,7 +26,7 @@ class AuthStore{
     }
   }
 
-  @action async removeUser(){
+  @action async logout(){
     try{
       await axios.post('DeviceToken/DeleteDeviceToken',
         {

@@ -6,15 +6,15 @@ import PropTypes from 'prop-types';
 
 
 const CustomCropperFooter = (props) => (
-  <View style={styles.buttonsContainer}>
-    <TouchableOpacity onPress={props.onCancel} style={styles.touchable}>
-      <Icon type="MaterialIcons" style={styles.icon} name="clear"/>
+  <View style={s.buttonsContainer}>
+    <TouchableOpacity onPress={props.onCancel} style={s.touchable}>
+      <Icon type="MaterialIcons" style={s.icon} name="clear"/>
     </TouchableOpacity>
-    <TouchableOpacity onPress={props.onRotate} style={styles.touchable}>
-      <Icon type="MaterialIcons" name='rotate-90-degrees-ccw' style={styles.icon} />
+    <TouchableOpacity onPress={props.onRotate} style={s.touchable}>
+      <Icon type="MaterialIcons" name='rotate-90-degrees-ccw' style={s.icon} />
     </TouchableOpacity>
-    <TouchableOpacity onPress={props.onDone} style={styles.touchable}>
-      <Text style={styles.text}>DONE</Text>
+    <TouchableOpacity onPress={props.onDone} style={[s.touchable, s.done]}>
+      <Icon type="MaterialIcons" name='check' style={[s.icon, {color: 'green', fontSize: res(30),}]} />
     </TouchableOpacity>
   </View>
 )
@@ -27,7 +27,7 @@ CustomCropperFooter.propTypes = {
   onCancel: PropTypes.func
 }
 
-const styles = StyleSheet.create({
+const s = StyleSheet.create({
   buttonsContainer: {
     flexDirection: 'row',
     alignItems: 'center', // 'flex-start'
@@ -40,6 +40,16 @@ const styles = StyleSheet.create({
   },
   touchable: {
     padding: 10,
+  },
+  done: {
+    height: res(50),
+    width: res(50),
+    borderRadius: res(25),
+    padding: res(5),
+    marginRight: res(10),
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'white',
   },
   icon: {
     color: 'white',

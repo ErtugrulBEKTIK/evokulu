@@ -14,11 +14,7 @@ export default class Profile extends Component {
     return (
       <Container noPadding>
         <View style={s.container}>
-          <SettingsItem text="Hesabım" first />
-          <SettingsItem text="Bildirimler" />
-          <SettingsItem text="Gizlilik" />
-          <SettingsItem text="Yardım" />
-          <SettingsItem text="Genel" />
+          <SettingsItem text="Hesabım" onPress={() => { NavigationService.navigate('Account');  }} first />
           <SettingsItem text="Çıkış" onPress={this.props.AuthStore.removeUser} />
         </View>
       </Container>

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Image, TextInput, Alert, Modal} from 'react-native';
+import {StyleSheet, View, Image, TextInput, Alert, Modal, Platform} from 'react-native';
 import {inject, observer} from "mobx-react";
-import {res, T, createFormData} from '~/helpers';
+import {res, T, createFormData, checkPermission} from '~/helpers';
 import {Text, Container, Button, TouchableBar, Box} from '~/components/my-base'
 import RNPickerSelect from 'react-native-picker-select';
 import Camera from './Camera';
@@ -29,7 +29,11 @@ export default class Ask extends Component {
     selectedLesson: null,
     question: '',
     isSubmitting: false,
-    resultModal: false
+    resultModal: false,
+    permissions: {
+      camera: null,
+      photo: null,
+    }
   };
 
   componentDidMount() {
@@ -71,6 +75,7 @@ export default class Ask extends Component {
       classLoading: false
     });
   };
+
 
   select = (value, field) => {
 
@@ -159,12 +164,17 @@ export default class Ask extends Component {
 
   render() {
 
-    const { classes, lessons, classLoading, selectedClass, selectedLesson, isSubmitting, resultModal } = this.state;
+    const { classes, lessons, classLoading, selectedClass, selectedLesson, isSubmitting, resultModal, permissions: {camera, photo} } = this.state;
 
     return (
       <Container scroll scrolViewRef={(ref) => { this.scrollRef = ref }} >
         <Camera />
-        <Gallery />
+        {
+          this.props.GalleryStore.modals.gallery
+            ? <Gallery />
+            : null
+        }
+
         <ImageEdit />
 
         <Modal transparent={true} visible={resultModal} >
@@ -192,7 +202,12 @@ export default class Ask extends Component {
             }
 
             <TouchableBar style={[s.selectPhoto, { backgroundColor: '#DC6929' }]} onPress={() => {
-              this.props.GalleryStore.setModal('camera', true)
+              checkPermission('camera').then((permission) => {
+                if(permission === 'granted'){
+                  this.props.GalleryStore.setModal('camera', true)
+                }
+              });
+
             }}>
               <View style={s.selectPhotoShape}>
                 <CameraIcon/>
