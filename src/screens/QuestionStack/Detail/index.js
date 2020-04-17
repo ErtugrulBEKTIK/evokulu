@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
-import {StyleSheet, Modal, View, Image, TouchableWithoutFeedback} from 'react-native';
+import {StyleSheet, Modal, View, Image, TouchableWithoutFeedback, Platform} from 'react-native';
 import moment from 'moment';
 import 'moment/locale/tr';
 import {res, T} from '~/helpers';
 import {Text, Container, Box, TouchableBox} from '~/components/my-base'
 import NavigationService from '~/NavigationService';
 import axios from "~/Api";
+import CameraRoll from "@react-native-community/cameraroll";
+
 import ImageViewer from "react-native-image-zoom-viewer";
 
 export default class QuestionDetail extends Component {
@@ -35,8 +37,23 @@ export default class QuestionDetail extends Component {
             onCancel={() => { this.setState({questionImage: false}) }}
             renderIndicator={() => null }
             enableSwipeDown={true}
+            saveToLocalByLongPress={Platform.OS === 'ios'}
+            onSave={() => { CameraRoll.saveToCameraRoll(QuestionFileUrl); }}
+            menuContext={{ saveToLocal: 'Galeriye kaydet', cancel: 'İptal' }}
             imageUrls={[{url: QuestionFileUrl}]}/>
         </Modal>
+
+        <Modal visible={answerImage} transparent={true}>
+          <ImageViewer
+            onCancel={() => { this.setState({answerImage: false}) }}
+            renderIndicator={() => null }
+            enableSwipeDown={true}
+            saveToLocalByLongPress={Platform.OS === 'ios'}
+            onSave={() => { CameraRoll.saveToCameraRoll(AnswerFileUrl); }}
+            menuContext={{ saveToLocal: 'Galeriye kaydet', cancel: 'İptal' }}
+            imageUrls={[{url: AnswerFileUrl}]}/>
+        </Modal>
+
         <Box style={s.box}>
           <View style={s.imageC}>
 
@@ -70,7 +87,12 @@ export default class QuestionDetail extends Component {
           {
             AnswerFileUrl
               ? <View style={s.imageC}>
-                  <Image style={s.image} source={{uri: QuestionFileUrl}} />
+                  <TouchableWithoutFeedback onPress={() => {
+                    this.setState({answerImage: true})
+                  }}>
+                    <Image style={s.image} source={{uri: AnswerFileUrl}} />
+                  </TouchableWithoutFeedback>
+
                 </View>
               : null
           }

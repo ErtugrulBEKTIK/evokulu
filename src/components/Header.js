@@ -4,9 +4,8 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import { res } from '~/helpers';
 import { Text } from '~/components/my-base'
 import Logout from '~/components/Logout'
-import {Icon} from "native-base";
 import NavigationService from "~/NavigationService";
-import {Logo, Announce, Home, Compass, Question, User, Document} from '~/assets/images/vectors';
+import {Logo, Announce, Home, Compass, Question, User, Document, Back} from '~/assets/images/vectors';
 
 
 
@@ -32,10 +31,8 @@ export default class Header extends Component {
             <TouchableOpacity
               onPress={() => { NavigationService.goBack()}}
               style={s.returnButton}>
-              <Icon style={s.returnButtonIcon}
-                    type="Ionicons"
-                    name="arrow-round-back"
-              />
+                <Back style={s.returnButtonIcon}/>
+
             </TouchableOpacity>
           }
           <View style={s.titleC}>
@@ -83,7 +80,8 @@ const s = StyleSheet.create({
     left: res(20)
   },
   returnButtonIcon: {
-    fontSize: res(36),
+    width: res(22),
+    height: res(22),
     color: '#DC6929'
   },
 

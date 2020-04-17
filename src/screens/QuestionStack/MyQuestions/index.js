@@ -36,6 +36,11 @@ export default class MyQuestions extends Component {
     return (
       <Container loading={loading} scroll>
 
+        {
+          questions.length === 0
+            ? <Text style={s.emptyInfo}>Henüz gönderilmiş sorunuz bulunmamaktadır!</Text>
+            : null
+        }
         { questions.map((question) => {
           const {$id, IsStatus, QuestionFileUrl, QuestionCreateDate, ClassName, CategoryName} = question;
 
@@ -104,5 +109,10 @@ const s = StyleSheet.create({
     color: '#545757',
     fontSize: res(13),
   },
+  emptyInfo: {
+    color: 'white',
+    textAlign: 'center',
+    marginTop: res(50)
+  }
 
 });

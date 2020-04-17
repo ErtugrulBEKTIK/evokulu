@@ -3,7 +3,7 @@ import _Competition from './competition.svg';
 import _Lesson from './lesson.svg';
 import _Online from './online.svg';
 import _Results from './results.svg';
-import _Announce from './announce.svg';
+import _Announce from './announce2.svg';
 
 
 

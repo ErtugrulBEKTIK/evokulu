@@ -7,6 +7,12 @@ const errors = {
   gallery: 'Galerinizden fotoğraf seçebilmek ayarlardan izin vermeniz gerekmektedir.'
 };
 const list = {
+  photo: {
+    permission: Platform.select({
+      android: PERMISSIONS.ANDROID.WRITE_EXTERNAL_STORAGE,
+      ios: PERMISSIONS.IOS.PHOTO_LIBRARY,
+    }),
+  },
   camera: {
     permission: Platform.select({
       android: PERMISSIONS.ANDROID.CAMERA,

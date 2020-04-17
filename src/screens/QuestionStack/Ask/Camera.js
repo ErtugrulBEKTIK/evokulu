@@ -39,7 +39,7 @@ export default class Camera extends Component {
     };
 
     if (Platform.OS === 'android' && Platform.Version > 22) {
-      checkPermission('photo');
+      //checkPermission('photo');
     }
 
     const data = await this.camera.takePictureAsync(options);

@@ -1,13 +1,14 @@
 import React, {Component} from 'react';
-import {StyleSheet, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import LottieView from "lottie-react-native";
 import {res, T} from '~/helpers';
 import { Text, Container, Box, TouchableBar} from '~/components/my-base';
 import axios from "~/Api";
-import LinearGradient from "react-native-linear-gradient";
-import NavigationService from "~/NavigationService";
+import {inject, observer} from "mobx-react";
 
 
+@inject('AuthStore')
+@observer
 export default class Question extends Component {
   constructor(props) {
     super(props);
@@ -80,7 +81,7 @@ export default class Question extends Component {
 
     const { data } = await axios.post('UserResult/InsertUserResult', {
       ExamId: this.props.navigation.getParam('exam').ExamId,
-      UserId: 4,
+      UserId: this.props.AuthStore.user.UserId,
       CorrectCount: trueQ,
       WrongCount: falseQ,
       NullCount: 0

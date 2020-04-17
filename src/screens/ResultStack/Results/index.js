@@ -4,7 +4,7 @@ import {res, T} from '~/helpers';
 import {Text, Container, TouchableBox, TouchableBar} from '~/components/my-base'
 import NavigationService from '~/NavigationService';
 import {inject, observer} from "mobx-react";
-import User from "./user.svg";
+import User from "./userWhiteBg.svg";
 import axios from "~/Api";
 
 @inject('AuthStore')

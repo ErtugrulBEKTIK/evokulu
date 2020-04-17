@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Modal, View, FlatList, Image, TouchableOpacity} from 'react-native';
+import {StyleSheet, Modal, View, Platform} from 'react-native';
 import {Header, Left, Right, Icon, Body, Title, Button} from 'native-base';
 import {inject, observer} from "mobx-react";
 import CameraRollPicker from 'react-native-camera-roll-picker';
@@ -41,7 +41,7 @@ export default class Gallery extends Component {
     return (
       <Modal visible={this.props.GalleryStore.modals.gallery}>
         <View style={{flex: 1}}>
-        <Header>
+        <Header style={ (Platform.OS === 'android') && { backgroundColor: '#CD462A' }}>
           <Left>
             <Button transparent onPress={() => {
               this.props.GalleryStore.setModal('gallery', false);

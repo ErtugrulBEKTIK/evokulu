@@ -42,9 +42,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new RNPermissionsPackage(),
-            new ImageResizerPackage(),
-            new CameraRollPackage(),
+          new ImageResizerPackage(),
           new RNSoundPackage(),
           new ImageEditorPackage(),
           new ImageRotatePackage(),
