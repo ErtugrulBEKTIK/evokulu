@@ -44,6 +44,11 @@ export default class Topics extends Component {
 
     return (
       <Container loading={loading} scroll>
+        {
+          exams.length === 0
+            ? <Text style={s.emptyInfo}>Henüz bu derste sınav bulunmamaktadır, çok yakında eklenecek!</Text>
+            : null
+        }
         { exams.map((exam) => (
           <TouchableBar
             onPress={() => { NavigationService.navigate('Exam', { exam }); }}
@@ -70,5 +75,10 @@ const s = StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: res(15),
+  },
+  emptyInfo: {
+    color: 'white',
+    textAlign: 'center',
+    marginTop: res(50)
   }
 });

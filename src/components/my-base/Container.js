@@ -34,6 +34,7 @@ const s = StyleSheet.create({
     width: Math.round(Dimensions.get('window').width),
     height: Math.round(Dimensions.get('window').width * 16/9),
   },
+
   container: {
     flex: 1,
     paddingTop: res(30),

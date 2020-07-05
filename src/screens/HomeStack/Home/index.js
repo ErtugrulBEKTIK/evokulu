@@ -24,32 +24,40 @@ export default class Home extends Component {
             <View style={s.iconC}><Competition/></View>
             <Text style={s.boxText}> Test Çöz </Text>
           </TouchableBox>
-          <TouchableBox style={s.box} onPress={() => {
+          <TouchableBox style={[s.box, {marginRight: 0}]} onPress={() => {
             NavigationService.navigate('Question');
           }}>
             <View style={s.iconC}><Ask/></View>
             <Text style={s.boxText}> Bize sor </Text>
           </TouchableBox>
-          <TouchableBox style={[s.box, {marginRight: 0}]} onPress={() => {
+
+        </View>
+        <View style={s.triple}>
+          {
+            false && (
+              <>
+                <TouchableBox style={s.box} onPress={() => {
+                  alert('Çok yakında!')
+                }}>
+                  <View style={s.iconC}><Online/></View>
+                  <Text style={s.boxText}> Online Sınıf </Text>
+                </TouchableBox>
+                <TouchableBox style={s.box} onPress={() => {
+                  alert('Çok yakında!')
+                }}>
+                  <View style={s.iconC}><Lesson/></View>
+                  <Text style={s.boxText}> Ders Anlatımı </Text>
+                </TouchableBox>
+              </>
+            )
+          }
+          <TouchableBox style={s.box} onPress={() => {
             NavigationService.navigate('Announce');
           }}>
             <View style={s.iconC}><Announce/></View>
             <Text style={s.boxText}> Duyurular </Text>
           </TouchableBox>
-        </View>
-        <View style={s.triple}>
-          <TouchableBox style={s.box} onPress={() => {
-            alert('Çok yakında!')
-          }}>
-            <View style={s.iconC}><Online/></View>
-            <Text style={s.boxText}> Online Sınıf </Text>
-          </TouchableBox>
-          <TouchableBox style={s.box} onPress={() => {
-            alert('Çok yakında!')
-          }}>
-            <View style={s.iconC}><Lesson/></View>
-            <Text style={s.boxText}> Ders Anlatımı </Text>
-          </TouchableBox>
+
           <TouchableBox style={[s.box, {marginRight: 0}]} onPress={() => {
             NavigationService.navigate('Results');
           }}>
